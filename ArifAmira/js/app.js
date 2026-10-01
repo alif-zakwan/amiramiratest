@@ -5,20 +5,22 @@
  *
  *   opening.js     sealed envelope → opening sequence
  *   scroll-mode.js sections revealed as you scroll   (mode "scroll")
- *   page-mode.js   one card at a time, turned        (mode "page")
+ *   page-mode.js   one card at a time, turned        (mode "page", off by default)
  *   animations.js  the shared reveal / leave / drift motions
  *   features.js    countdown, RSVP, music, gift, share
  */
 import { initOpening } from './opening.js';
 import { initScrollMode } from './scroll-mode.js';
-import { initPageMode } from './page-mode.js';
 import { initCountdown, initRsvp, initMusic, initGift, initShare } from './features.js';
 
 const settings = JSON.parse(document.getElementById('appSettings').textContent);
 const labels = settings.labels;
 const sections = Array.from(document.querySelectorAll('[data-section]'));
 
-const experience = settings.mode === 'page' ? initPageMode(sections) : initScrollMode(sections);
+// page mode is switched off in config; its code is only fetched if it's enabled
+const experience = settings.mode === 'page'
+  ? (await import('./page-mode.js')).initPageMode(sections)
+  : initScrollMode(sections);
 const { startMusic } = initMusic();
 
 initOpening({

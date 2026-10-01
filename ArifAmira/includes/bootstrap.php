@@ -5,7 +5,7 @@
  * few values the templates need: guest name, experience mode, the
  * countdown target and which sections to render.
  *
- * Exposes: $cfg, $guestName, $mode, $sections, and the helpers e() / t().
+ * Exposes: $cfg, $guestName, $mode, $showModeSwitcher, $sections, and the helpers e() / t().
  */
 
 $cfg = require __DIR__ . '/../config/config.php';
@@ -16,7 +16,7 @@ $cfg += [
     'labels'     => [],
     'music_file' => '',
 ];
-$cfg['experience'] += ['default_mode' => 'scroll', 'show_mode_switcher' => false];
+$cfg['experience'] += ['default_mode' => 'scroll', 'allowed_modes' => ['scroll'], 'show_mode_switcher' => false];
 
 date_default_timezone_set($cfg['timezone']);
 
@@ -39,11 +39,14 @@ function t(string $key): string
 $guestName = isset($_GET['to']) ? trim(mb_substr((string) $_GET['to'], 0, 60)) : '';
 
 // ---- experience mode: ?mode=scroll|page overrides the config -------
-$modes = ['scroll', 'page'];
+$allowedModes = array_values(array_intersect((array) $cfg['experience']['allowed_modes'], ['scroll', 'page'])) ?: ['scroll'];
 $mode = $_GET['mode'] ?? $cfg['experience']['default_mode'];
-if (!in_array($mode, $modes, true)) {
-    $mode = 'scroll';
+if (!in_array($mode, $allowedModes, true)) {
+    $mode = in_array($cfg['experience']['default_mode'], $allowedModes, true)
+        ? $cfg['experience']['default_mode']
+        : $allowedModes[0];
 }
+$showModeSwitcher = !empty($cfg['experience']['show_mode_switcher']) && count($allowedModes) > 1;
 
 // ---- countdown target as ISO-8601 with the venue's UTC offset ------
 $weddingAt = new DateTimeImmutable($cfg['wedding_datetime'], new DateTimeZone($cfg['timezone']));

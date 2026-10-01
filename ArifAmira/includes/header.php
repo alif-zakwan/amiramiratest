@@ -108,7 +108,7 @@ $arabicFontUrl = 'https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&di
 </button>
 <?php endif; ?>
 
-<?php if (!empty($cfg['experience']['show_mode_switcher'])): ?>
+<?php if ($showModeSwitcher): ?>
 <nav class="mode-switch" aria-label="<?= t('mode_label') ?>">
     <a href="<?= e(mode_url('scroll')) ?>"<?= $mode === 'scroll' ? ' aria-current="page"' : '' ?>><?= t('mode_scroll') ?></a>
     <a href="<?= e(mode_url('page')) ?>"<?= $mode === 'page' ? ' aria-current="page"' : '' ?>><?= t('mode_page') ?></a>

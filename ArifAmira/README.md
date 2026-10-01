@@ -44,17 +44,14 @@ Every name, date, time, venue, contact number, quote, toggle (RSVP,
 gift section, music) and every fixed label on the page (`labels`) lives
 there with comments explaining each field.
 
-## Two experiences, one invitation
+## Scroll experience (page mode is switched off)
 
-| Link | Experience |
-|---|---|
-| `index.php` | the default from `experience.default_mode` in the config (`scroll`) |
-| `index.php?mode=scroll` | one long card, sections reveal as you scroll |
-| `index.php?mode=page` | one card at a time — swipe, tap ‹ ›, the diamonds, or use arrow keys |
-
-Both use exactly the same sections, content and styling. For client
-review a small **Skrol / Halaman** switch sits top-left; set
-`experience.show_mode_switcher` to `false` for the final link.
+The invitation is one long scrolling card. A page-by-page version
+(swipe / tap to turn cards) is built but **switched off** at the client's
+request: `?mode=page` is ignored and no switcher is shown. To bring it back
+for a demo, in `config/config.php` set
+`'allowed_modes' => ['scroll', 'page']` (and `'show_mode_switcher' => true`
+to show the small Skrol / Halaman switch); then `?mode=page` works.
 
 ## Folder structure
 
@@ -70,7 +67,7 @@ ArifAmira/
 │   ├── components.php     Reusable card pieces: frame, florals, divider, date line
 │   ├── header.php         <head>, fonts, ornament sprite, music + mode switch
 │   ├── opening.php        The sealed envelope
-│   ├── footer.php         Page-mode navigation, settings for JS, scripts
+│   ├── footer.php         Settings for JS, scripts (+ page-mode navigation when enabled)
 │   └── sections/          One file per section, in this order:
 │                          cover, countdown, invitation, details, venue,
 │                          contacts, rsvp, wishes, gift (optional), closing
@@ -86,7 +83,7 @@ ArifAmira/
 │   ├── animations.js      Shared motions: reveal, leave, drifting blossom
 │   ├── opening.js         Envelope opening timeline
 │   ├── scroll-mode.js     Reveal-on-scroll, floral parallax
-│   ├── page-mode.js       Page turns, swipe/keys/dots
+│   ├── page-mode.js       Page turns, swipe/keys/dots (loaded only if page mode is enabled) (only loaded if page mode is enabled)
 │   ├── features.js        Countdown, RSVP + wishes, music, gift, share
 │   └── vendor/gsap.min.js GSAP 3.13 core (bundled, no CDN)
 ├── data/

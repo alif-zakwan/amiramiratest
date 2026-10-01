@@ -99,14 +99,17 @@ $config = [
     'music_file'  => '',
 
     // ---- Experience ------------------------------------------------
-    // 'scroll' = one long scrolling card (the default)
+    // 'scroll' = one long scrolling card (the client's choice)
     // 'page'   = one card at a time, swipe / tap to turn the page
-    // Either can also be forced per link with ?mode=scroll or ?mode=page.
+    //            (built, but switched off)
+    // Only modes listed in 'allowed_modes' can be used; a link with
+    // ?mode=page is ignored unless 'page' is listed. To bring page mode
+    // back for a demo: allowed_modes => ['scroll', 'page'] and
+    // show_mode_switcher => true.
     'experience' => [
         'default_mode'       => 'scroll',
-        // Shows a small "Skrol / Halaman" switch so the two modes can be
-        // compared during client review. Set to false for the final link.
-        'show_mode_switcher' => true,
+        'allowed_modes'      => ['scroll'],
+        'show_mode_switcher' => false,
     ],
 
     // ---- Interface wording --------------------------------------------
