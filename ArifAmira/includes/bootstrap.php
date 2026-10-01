@@ -5,7 +5,7 @@
  * few values the templates need: guest name, experience mode, the
  * countdown target and which sections to render.
  *
- * Exposes: $cfg, $guestName, $mode, $showModeSwitcher, $sections, and the helpers e() / t().
+ * Exposes: $cfg, $mode, $showModeSwitcher, $sections, and the helpers e() / t().
  */
 
 $cfg = require __DIR__ . '/../config/config.php';
@@ -35,9 +35,6 @@ function t(string $key): string
     return e($cfg['labels'][$key] ?? '');
 }
 
-// ---- guest personalisation: ?to=Puan+Salmah -----------------------
-$guestName = isset($_GET['to']) ? trim(mb_substr((string) $_GET['to'], 0, 60)) : '';
-
 // ---- experience mode: ?mode=scroll|page overrides the config -------
 $allowedModes = array_values(array_intersect((array) $cfg['experience']['allowed_modes'], ['scroll', 'page'])) ?: ['scroll'];
 $mode = $_GET['mode'] ?? $cfg['experience']['default_mode'];
@@ -62,7 +59,7 @@ if (!empty($cfg['enable_salam_kaut'])) {
 }
 $sections[] = 'closing';
 
-/** Link to the current page in another mode, keeping ?to= intact. */
+/** Link to the current page in another mode. */
 function mode_url(string $targetMode): string
 {
     $query = $_GET;

@@ -6,8 +6,7 @@
  * then open http://localhost:8000/
  *
  * URL options:
- *   ?to=Puan+Salmah   personalises the envelope ("Kepada")
- *   ?mode=page        page-by-page experience (default comes from config)
+ *   ?mode=page        page-by-page experience (switched off in config)
  */
 
 require __DIR__ . '/includes/bootstrap.php';

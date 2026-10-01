@@ -96,7 +96,7 @@ $config = [
     // 'assets/audio/wedding-song.mp3'. Leave blank to hide the music button.
     // Music starts when the guest taps the wax seal (browsers block
     // autoplay with sound before a tap).
-    'music_file'  => '',
+    'music_file'  => 'assets/audio/music_file.mp3',
 
     // ---- Experience ------------------------------------------------
     // 'scroll' = one long scrolling card (the client's choice)
@@ -115,9 +115,6 @@ $config = [
     // ---- Interface wording --------------------------------------------
     // Every fixed label on the page, in one place.
     'labels' => [
-        'to'               => 'Kepada',
-        'to_default'       => 'Tetamu Yang Dihormati',
-        'open_hint'        => 'Tekan meterai untuk membuka jemputan',
         'open_aria'        => 'Buka jemputan',
         'skip'             => 'Langkau',
 

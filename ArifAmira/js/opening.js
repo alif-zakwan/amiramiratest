@@ -51,7 +51,6 @@ export function initOpening({ onOpen, onReveal, onDone }) {
       // the seal gives under the thumb…
       .to(seal, { scale: 0.92, duration: 0.12, ease: 'power2.in' })
       .to(seal, { scale: 1.05, duration: 0.2, ease: 'power2.out' })
-      .to(part('text'), { autoAlpha: 0, duration: 0.5, ease: 'power1.out' }, '<')
       .to(part('seal-letters'), { autoAlpha: 0, duration: 0.2 }, '<')
       // …breaks in two, and the flaps part
       .addLabel('split')
@@ -60,7 +59,7 @@ export function initOpening({ onOpen, onReveal, onDone }) {
       .to(part('flap-left'), { xPercent: -104, duration: 1.3, ease: 'power3.inOut' }, 'split+=0.08')
       .to(part('flap-right'), { xPercent: 104, duration: 1.3, ease: 'power3.inOut' }, 'split+=0.08')
       .to(part('florals'), { autoAlpha: 0, scale: 1.06, duration: 0.9, ease: 'power1.inOut' }, 'split+=0.15')
-      .fromTo(part('monogram'), { scale: 0.94 }, { scale: 1, duration: 1.5, ease: 'power2.out' }, 'split')
+      .fromTo(part('monogram'), { scale: 0.94, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 1.5, ease: 'power2.out' }, 'split+=0.1')
       // a short hold on the emblem, then it lifts away into the cover
       .addLabel('settle', '+=0.1')
       .add(onReveal, 'settle')

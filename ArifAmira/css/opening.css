@@ -27,6 +27,7 @@
   width:min(62vw, 34vh, 270px);
   aspect-ratio:160 / 200;
   display:grid; place-items:center;
+  opacity:0;                /* stays hidden until the flaps part (js/opening.js) */
 }
 .opening__oval{
   position:absolute; inset:0;
@@ -62,56 +63,6 @@
 }
 .opening__floral--tr{ width:min(46vw, 230px); top:0; right:0; transform:translate(18%, -22%) rotate(4deg); }
 .opening__floral--bl{ width:min(22vw, 120px); bottom:0; left:0; transform:translate(-30%, 30%) rotate(172deg); }
-
-/* text on the envelope */
-.opening__to{
-  position:absolute;
-  top:max(13vh, calc(env(safe-area-inset-top) + 4.5rem));
-  left:50%;
-  width:min(70vw, 22rem);
-  transform:translateX(-50%);
-  text-align:center;
-}
-.opening__to-label{
-  display:block;
-  font-size:.66rem;
-  font-weight:500;
-  letter-spacing:.24em;
-  text-transform:uppercase;
-  opacity:.85;
-}
-.opening__to-name{
-  display:block;
-  margin-top:.35rem;
-  font-family:var(--font-caps);
-  font-size:clamp(1rem, 4.6vw, 1.2rem);
-  letter-spacing:.06em;
-}
-.opening__footer{
-  position:absolute;
-  bottom:max(8vh, calc(env(safe-area-inset-bottom) + 2.5rem));
-  left:50%;
-  width:min(84vw, 24rem);
-  transform:translateX(-50%);
-  text-align:center;
-}
-.opening__names{
-  font-family:var(--font-script);
-  font-size:clamp(1.9rem, 8.5vw, 2.4rem);
-  line-height:1.2;
-  text-shadow:0 2px 8px rgba(20,0,0,.5);
-}
-.opening__names > span{ display:block; }
-.opening__names i{ font-style:normal; font-size:.8em; }
-.opening__hint{
-  margin-top:.8rem;
-  font-size:.64rem;
-  font-weight:500;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  animation:hint-breathe 2.6s ease-in-out infinite;
-}
-@keyframes hint-breathe{ 0%,100%{ opacity:.5; } 50%{ opacity:1; } }
 
 /* ---------------------------------------------------------------------
    WAX SEAL — two halves (so it can break apart), pressed initials and
@@ -181,8 +132,7 @@
 @keyframes seal-glint{ 0%{ transform:translateX(-70%); } 35%,100%{ transform:translateX(70%); } }
 @keyframes seal-flare{ 0%,22%{ opacity:0; transform:scale(.4); } 32%{ opacity:1; transform:scale(1.2); } 48%,100%{ opacity:0; transform:scale(.6); } }
 
-.opening.is-opening .seal__glint,
-.opening.is-opening .opening__hint{ animation:none; }
+.opening.is-opening .seal__glint{ animation:none; }
 
 .opening__skip{
   position:absolute;

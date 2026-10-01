@@ -29,14 +29,6 @@ Open the `ArifAmira` folder in VS Code, right‑click `index.php` →
 > folder is writable by the web server (`chmod 775 data` on
 > Mac/Linux — Windows/XAMPP usually needs no change).
 
-## Personalising a link per guest
-
-Add `?to=NameHere` to the URL and it appears on the envelope and in
-greetings, e.g.:
-```
-http://localhost:8000/index.php?to=Puan+Salmah
-```
-
 ## Editing the content
 
 **You should only ever need to open one file: `config/config.php`.**
@@ -63,7 +55,7 @@ ArifAmira/
 ├── config/
 │   └── config.php         ← EDIT THIS: all wedding details + labels
 ├── includes/
-│   ├── bootstrap.php      Loads config, ?to= / ?mode=, section order, helpers
+│   ├── bootstrap.php      Loads config, ?mode=, section order, helpers
 │   ├── components.php     Reusable card pieces: frame, florals, divider, date line
 │   ├── header.php         <head>, fonts, ornament sprite, music + mode switch
 │   ├── opening.php        The sealed envelope
@@ -108,7 +100,7 @@ ArifAmira/
   page mode. A single blossom drifts across the invitation card.
 - **Live countdown**, **RSVP** (saved to `data/rsvp.json`, with a hidden
   spam trap), **wishes wall**, **copy bank account**, **share** (native
-  share sheet or copy link), **music toggle**, **`?to=` guest name**.
+  share sheet or copy link), **music toggle**..
 - **Reduced motion** — if the phone asks for less motion, the envelope
   simply opens and everything is shown without animation.
 
