@@ -9,7 +9,15 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install mbstring
 
+# The Debian Apache config ignores .htaccess files (AllowOverride None).
+# Let ArifAmira/.htaccess apply, so data/ (RSVPs incl. guest IPs),
+# config/ and includes/ can't be downloaded directly.
+RUN printf '<Directory /var/www/html>\n    AllowOverride All\n</Directory>\n' \
+        > /etc/apache2/conf-available/arifamira.conf \
+    && a2enconf arifamira
+
 # Apache serves from /var/www/html by default — copy the app straight in
+# (references/ and notes are excluded by .dockerignore)
 COPY ArifAmira/ /var/www/html/
 
 # The RSVP wall writes to data/rsvp.json, so make sure that's writable.

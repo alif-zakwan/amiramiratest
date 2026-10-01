@@ -1,0 +1,114 @@
+/* =====================================================================
+   Base: reset, page background, shared type, accessibility helpers
+   ===================================================================== */
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+  background:var(--paper);
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  min-height:100dvh;
+  font-family:var(--font-body);
+  font-size:1rem;
+  line-height:1.6;
+  color:var(--ink);
+  background:transparent;
+  overflow-x:clip;
+  -webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* the page stays still behind the sealed envelope */
+.js:not(.is-opened) body{ overflow:hidden; }
+
+img, svg{ display:block; max-width:100%; }
+/* the hidden attribute must win over component display rules (flex/grid) */
+[hidden]{ display:none !important; }
+a{ color:inherit; }
+button, input, select, textarea{ font:inherit; color:inherit; }
+p{ margin:0; }
+
+:focus-visible{
+  outline:2px solid var(--gold);
+  outline-offset:3px;
+}
+
+/* ---------------------------------------------------------------------
+   Embossed paper behind everything: a seamless relief tile plus two
+   oversized, blind-embossed floral sprays (the client's own artwork,
+   desaturated) for the damask feel of the card's background.
+   Fixed layer, painted once — nothing here animates.
+   --------------------------------------------------------------------- */
+.paper-backdrop{
+  position:fixed; inset:0; z-index:-1;
+  background:
+    radial-gradient(ellipse 120% 70% at 50% 0%, rgba(255,255,255,.45), transparent 70%),
+    var(--tex-paper) 0 0 / 256px 256px,
+    var(--paper);
+  pointer-events:none;
+  overflow:hidden;
+}
+.paper-backdrop::before,
+.paper-backdrop::after{
+  content:"";
+  position:absolute;
+  width:min(70vw, 420px);
+  aspect-ratio:127 / 218;
+  background:url("../assets/images/flower1.webp") center / contain no-repeat;
+  filter:grayscale(1) sepia(.25) brightness(1.25) contrast(.55) blur(.6px)
+         drop-shadow(-1px -1px 0 rgba(255,255,255,.7)) drop-shadow(1.5px 1.5px 1px rgba(110,90,60,.35));
+  opacity:.32;
+}
+.paper-backdrop::before{ top:-6%; left:-18%; transform:rotate(18deg); }
+.paper-backdrop::after{ bottom:-8%; right:-18%; transform:rotate(198deg); }
+
+/* ---------------------------------------------------------------------
+   Shared typographic voices from the card
+   --------------------------------------------------------------------- */
+.caps-text{
+  font-family:var(--font-body);
+  font-weight:500;
+  font-size:clamp(.66rem, 2.9vw, .78rem);
+  line-height:2;
+  letter-spacing:var(--tracking-wide);
+  text-transform:uppercase;
+}
+.caps-label{
+  font-family:var(--font-body);
+  font-weight:500;
+  font-size:clamp(.66rem, 2.8vw, .75rem);
+  letter-spacing:var(--tracking-wide);
+  text-transform:uppercase;
+}
+.section-title{
+  margin:0;
+  font-family:var(--font-caps);
+  font-weight:600;
+  font-size:clamp(1.05rem, 4.8vw, 1.3rem);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--ink);
+}
+.section-note{
+  font-size:.85rem;
+  color:var(--ink-soft);
+  margin:0 auto 1.4rem;
+  max-width:32ch;
+}
+.section-note strong{ color:var(--ink); font-weight:600; }
+
+/* reduced motion: CSS-driven loops stop (GSAP motion is handled in js/) */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *,*::before,*::after{
+    animation-duration:.01ms;
+    animation-iteration-count:1;
+    transition-duration:.01ms;
+  }
+}

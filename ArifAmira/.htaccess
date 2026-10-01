@@ -1,0 +1,12 @@
+# Apache (Docker image, XAMPP): keep private and internal files off the web.
+#  - data/       RSVP entries, including guests' IP addresses
+#  - config/, includes/   PHP pulled in by index.php, never requested directly
+#  - references/ the client's design references
+#  - *.md / *.txt notes
+Options -Indexes
+
+RedirectMatch 404 ^/(?:.*/)?(?:data|config|includes|references)(?:/|$)
+
+<FilesMatch "\.(md|txt)$">
+    Require all denied
+</FilesMatch>

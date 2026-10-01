@@ -1,88 +1,116 @@
 <?php
 /**
- * Renders <head> and opens <body>.
- * Expects $cfg (config array) and $guestName to already be set by index.php
+ * Renders <head>, the shared SVG ornament sprite, the paper background
+ * and the fixed controls (music, mode switch). Expects bootstrap.php.
  */
+$fontsUrl = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@400;500;600&family=Pinyon+Script&display=swap';
+// Amiri is only used for the Arabic greeting, so request just those glyphs
+$arabicFontUrl = 'https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap&text=' . rawurlencode($cfg['greeting_arabic']);
 ?>
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="ms" class="no-js" data-mode="<?= e($mode) ?>">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title><?= htmlspecialchars($cfg['site_title']) ?></title>
-<meta name="description" content="<?= htmlspecialchars($cfg['og_description']) ?>">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4a0707">
+<title><?= e($cfg['site_title']) ?></title>
+<meta name="description" content="<?= e($cfg['og_description']) ?>">
 
 <!-- Open Graph so the link looks good when shared on WhatsApp / Telegram -->
-<meta property="og:title" content="<?= htmlspecialchars($cfg['site_title']) ?>">
-<meta property="og:description" content="<?= htmlspecialchars($cfg['og_description']) ?>">
+<meta property="og:title" content="<?= e($cfg['site_title']) ?>">
+<meta property="og:description" content="<?= e($cfg['og_description']) ?>">
 <meta property="og:type" content="website">
 
 <link rel="icon" href="data:,">
+<script>document.documentElement.classList.replace('no-js', 'js');</script>
 
-<!-- Fonts: Playfair Display (headings), Cormorant Garamond (body/labels),
-     Mrs Saint Delafield (romantic script for the couple's names),
-     Noto Naskh Arabic (for the Arabic greeting) -->
+<!-- Fonts, matched to the printed card:
+     Pinyon Script (couple's names), Cinzel (engraved capitals),
+     Montserrat (spaced-out body text), Amiri (Arabic greeting) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Cormorant+Garamond:wght@400;500;600&family=Mrs+Saint+Delafield&family=Noto+Naskh+Arabic:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="<?= e($fontsUrl) ?>">
+<link rel="stylesheet" href="<?= e($arabicFontUrl) ?>">
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="preload" as="image" href="assets/images/emblem-doves.webp">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/sections.css">
+<link rel="stylesheet" href="css/opening.css">
+<link rel="stylesheet" href="css/modes.css">
 </head>
-<body data-guest="<?= htmlspecialchars($guestName) ?>">
+<body>
 
-<!-- Botanical corner-flourish sprite, defined once and reused via
-     <use href="#corner-floral-symbol"> throughout the page (see
-     includes/corner-floral.php) -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="corner-floral-symbol" viewBox="0 0 100 100">
-    <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
-      <path d="M6 6c18 1 34 8 42 26" opacity=".8"/>
-      <path d="M6 6c1 18 8 34 26 42" opacity=".8"/>
-      <path d="M6 6c10 4 18 11 23 21" opacity=".55"/>
-      <path d="M18 10c8 6 12 14 12 22" opacity=".45"/>
-      <g fill="currentColor" stroke="none">
-        <circle cx="9" cy="9" r="3.4" opacity=".9"/>
-        <path d="M22 8c4-4 10-3 12 2-5 3-10 2-12-2z" opacity=".65"/>
-        <path d="M22 8c1-5 6-8 11-6-2 5-6 8-11 6z" opacity=".65"/>
-        <path d="M8 22c-4 4-3 10 2 12 3-5 2-10-2-12z" opacity=".65"/>
-        <path d="M8 22c-5-1-8-6-6-11 5 2 8 6 6 11z" opacity=".65"/>
-        <circle cx="30" cy="14" r="2" opacity=".5"/>
-        <circle cx="14" cy="30" r="2" opacity=".5"/>
-        <circle cx="38" cy="24" r="1.4" opacity=".4"/>
-      </g>
+<!-- Shared ornaments, defined once and reused via <use href="#…"> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <!-- line · diamonds · central flourish · diamonds · line (card divider) -->
+  <symbol id="ornament-divider" viewBox="0 0 240 16">
+    <g fill="none" stroke="currentColor" stroke-linecap="round">
+      <path d="M10 8h76M154 8h76" stroke-width=".8"/>
+      <path d="M120 8c-2.5-4.5-9-5-10.5-.6-1.2 3.6 3.6 5.4 5.6 2.6" stroke-width="1"/>
+      <path d="M120 8c2.5-4.5 9-5 10.5-.6 1.2 3.6-3.6 5.4-5.6 2.6" stroke-width="1"/>
+      <path d="M120 8c-2.5 4.5-9 5-10.5.6M120 8c2.5 4.5 9 5 10.5.6" stroke-width=".7" opacity=".7"/>
+    </g>
+    <g fill="currentColor">
+      <path d="M3 8l3.2-2.3L9.4 8l-3.2 2.3z"/>
+      <path d="M230.6 8l3.2-2.3L237 8l-3.2 2.3z"/>
+      <path d="M86 8l4-2.8L94 8l-4 2.8z"/>
+      <path d="M95.5 8l2.6-1.9 2.6 1.9-2.6 1.9z"/>
+      <path d="M146 8l4-2.8 4 2.8-4 2.8z"/>
+      <path d="M139.3 8l2.6-1.9 2.6 1.9-2.6 1.9z"/>
+      <circle cx="120" cy="8" r="1.5"/>
     </g>
   </symbol>
 
-  <!-- larger single flower + leaf sprite for the drifting floral
-       accent (#8) — same white/gold line-art family as the corner
-       flourish above, just a standalone blossom instead of a spray -->
-  <symbol id="drift-sprite-symbol" viewBox="0 0 100 100">
-    <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
-      <path d="M50 58c0-16-6-28-6-28" opacity=".6"/>
-      <path d="M44 44c-8-2-14-10-13-18 8 1 14 8 13 18z" opacity=".55"/>
-      <g fill="currentColor" stroke="none">
-        <circle cx="50" cy="26" r="7" opacity=".85"/>
-        <ellipse cx="38" cy="30" rx="9" ry="6" transform="rotate(-35 38 30)" opacity=".7"/>
-        <ellipse cx="62" cy="30" rx="9" ry="6" transform="rotate(35 62 30)" opacity=".7"/>
-        <ellipse cx="42" cy="18" rx="6" ry="9" transform="rotate(-15 42 18)" opacity=".6"/>
-        <ellipse cx="58" cy="18" rx="6" ry="9" transform="rotate(15 58 18)" opacity=".6"/>
-        <circle cx="50" cy="24" r="3.4" opacity=".95"/>
-      </g>
+  <!-- scroll curl that sits in each scooped corner of a card -->
+  <symbol id="ornament-corner" viewBox="0 0 64 64">
+    <g fill="none" stroke="currentColor" stroke-linecap="round">
+      <path d="M8 44C8 24 24 8 44 8" stroke-width="1.2"/>
+      <path d="M44 8c7 0 11 4.5 8.5 8.4-2 3-6.6 2-6-1.4" stroke-width="1.2"/>
+      <path d="M8 44c0 7 4.5 11 8.4 8.5 3-2 2-6.6-1.4-6" stroke-width="1.2"/>
+      <path d="M16 40c0-13 11-24 24-24" stroke-width=".7" opacity=".55"/>
+    </g>
+  </symbol>
+
+  <!-- four-point sparkle, as on the card's frame -->
+  <symbol id="ornament-star" viewBox="-6 -6 12 12">
+    <path fill="currentColor" d="M0-6 1.1-1.1 6 0 1.1 1.1 0 6-1.1 1.1-6 0-1.1-1.1z"/>
+  </symbol>
+
+  <!-- ornate double oval that frames the emblem during the opening -->
+  <symbol id="ornament-oval" viewBox="0 0 160 200">
+    <g fill="none" stroke="currentColor">
+      <ellipse cx="80" cy="100" rx="70" ry="92" stroke-width="1"/>
+      <ellipse cx="80" cy="100" rx="64" ry="86" stroke-width=".6" stroke-dasharray="1 3.5" opacity=".8"/>
+    </g>
+    <g fill="currentColor" opacity=".9">
+      <path d="M80 8c-9 0-15 5-15 5s6-2 15-2 15 2 15 2-6-5-15-5z"/>
+      <path d="M50 14c6-6 18-9 30-9s24 3 30 9c-8-3-19-5-30-5s-22 2-30 5z"/>
+      <circle cx="80" cy="3.5" r="1.6"/>
+      <path d="M80 192c-9 0-15-5-15-5s6 2 15 2 15-2 15-2-6 5-15 5z"/>
+      <path d="M50 186c6 6 18 9 30 9s24-3 30-9c-8 3-19 5-30 5s-22-2-30-5z"/>
+      <circle cx="80" cy="196.5" r="1.6"/>
     </g>
   </symbol>
 </svg>
 
-<!-- floating petals layer, filled by js/main.js -->
-<div class="petal-field" id="petalField" aria-hidden="true"></div>
+<div class="paper-backdrop" aria-hidden="true"></div>
 
-<!-- background music control -->
 <?php if (!empty($cfg['music_file'])): ?>
-<audio id="bgMusic" src="<?= htmlspecialchars($cfg['music_file']) ?>" loop preload="none"></audio>
-<button id="musicToggle" class="music-toggle" type="button" aria-label="Main / henti muzik" aria-pressed="false">
-    <svg class="icon-note" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+<audio id="bgMusic" src="<?= e($cfg['music_file']) ?>" loop preload="none"></audio>
+<button id="musicToggle" class="music-toggle" type="button" aria-label="<?= t('music_aria') ?>" aria-pressed="false">
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
         <path fill="currentColor" d="M9 18V5l12-2v13"/>
         <circle cx="6" cy="18" r="3" fill="currentColor"/>
         <circle cx="18" cy="16" r="3" fill="currentColor"/>
     </svg>
 </button>
+<?php endif; ?>
+
+<?php if (!empty($cfg['experience']['show_mode_switcher'])): ?>
+<nav class="mode-switch" aria-label="<?= t('mode_label') ?>">
+    <a href="<?= e(mode_url('scroll')) ?>"<?= $mode === 'scroll' ? ' aria-current="page"' : '' ?>><?= t('mode_scroll') ?></a>
+    <a href="<?= e(mode_url('page')) ?>"<?= $mode === 'page' ? ' aria-current="page"' : '' ?>><?= t('mode_page') ?></a>
+</nav>
 <?php endif; ?>

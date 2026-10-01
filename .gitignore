@@ -1,2 +1,10 @@
 .DS_Store
 *.log
+
+# private settings and guest data — never commit these
+ArifAmira/config/config.local.php
+ArifAmira/data/*.json
+
+# client's design references (large, private) and working notes
+ArifAmira/references/
+ArifAmira/CLAUDE_WEDDING_REDESIGN.md

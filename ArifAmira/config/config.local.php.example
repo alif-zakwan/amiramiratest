@@ -1,0 +1,15 @@
+<?php
+/**
+ * PRIVATE SETTINGS — copy this file to config.local.php and fill it in.
+ * config.local.php is ignored by git, so the secret never reaches GitHub.
+ * (On Render, use the RSVP_SHEET_URL / RSVP_SHEET_SECRET environment
+ * variables instead; this file is only for XAMPP / your own computer.)
+ *
+ * See docs/google-sheets-rsvp/SETUP.md
+ */
+return [
+    'rsvp_sheet' => [
+        'url'    => '',   // the Google web-app URL, ending in /exec
+        'secret' => '',   // the same phrase as SECRET in Code.gs
+    ],
+];

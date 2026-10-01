@@ -1,3 +1,7 @@
 .git
 .gitignore
 DEPLOY.md
+**/*.md
+ArifAmira/references
+**/config.local.php
+docs

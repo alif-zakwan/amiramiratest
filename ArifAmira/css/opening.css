@@ -1,0 +1,200 @@
+/* =====================================================================
+   OPENING — the sealed envelope (markup: includes/opening.php,
+   motion: js/opening.js). Static styling and idle loops only; the
+   opening sequence itself is a GSAP timeline.
+   ===================================================================== */
+
+.opening{
+  position:fixed; inset:0;
+  z-index:50;
+  overflow:hidden;
+  color:var(--ivory);
+  background:var(--maroon-deep);
+}
+.no-js .opening{ display:none; }
+.opening.is-done{ display:none; }
+
+/* what lies inside: the emblem in its oval, seen between the flaps */
+.opening__reveal{
+  position:absolute; inset:0;
+  display:grid; place-items:center;
+  background:
+    var(--tex-grain) 0 0 / 128px 128px,
+    radial-gradient(ellipse 80% 55% at 50% 50%, var(--maroon-lift), var(--maroon) 55%, var(--maroon-deep));
+}
+.opening__monogram{
+  position:relative;
+  width:min(62vw, 34vh, 270px);
+  aspect-ratio:160 / 200;
+  display:grid; place-items:center;
+}
+.opening__oval{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  color:var(--blush);
+  opacity:.85;
+}
+.opening__emblem{ width:66%; height:auto; filter:drop-shadow(0 6px 10px rgba(20,0,0,.4)); }
+
+/* envelope flaps: two textured points meeting under the seal */
+.opening__flap{
+  position:absolute; inset:0;
+  filter:drop-shadow(0 0 1px rgba(255,250,243,.35)) drop-shadow(0 10px 24px rgba(15,0,0,.55));
+  will-change:transform;
+}
+.opening__flap span{
+  position:absolute; inset:0;
+  background:
+    var(--tex-grain) 0 0 / 128px 128px,
+    linear-gradient(var(--flap-angle), #5a0909 0%, var(--maroon-deep) 70%, #380404 100%);
+}
+.opening__flap--left{ --flap-angle:100deg; }
+.opening__flap--left span{ clip-path:polygon(0 -2%, 53% 50%, 0 102%); }
+.opening__flap--right{ --flap-angle:260deg; }
+.opening__flap--right span{ clip-path:polygon(100% -2%, 47% 50%, 100% 102%); }
+
+/* florals resting on the envelope, as on the card's corners */
+.opening__florals{ position:absolute; inset:0; pointer-events:none; }
+.opening__floral{
+  position:absolute;
+  height:auto;
+  filter:drop-shadow(0 6px 8px rgba(20,0,0,.4));
+}
+.opening__floral--tr{ width:min(46vw, 230px); top:0; right:0; transform:translate(18%, -22%) rotate(4deg); }
+.opening__floral--bl{ width:min(22vw, 120px); bottom:0; left:0; transform:translate(-30%, 30%) rotate(172deg); }
+
+/* text on the envelope */
+.opening__to{
+  position:absolute;
+  top:max(13vh, calc(env(safe-area-inset-top) + 4.5rem));
+  left:50%;
+  width:min(70vw, 22rem);
+  transform:translateX(-50%);
+  text-align:center;
+}
+.opening__to-label{
+  display:block;
+  font-size:.66rem;
+  font-weight:500;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  opacity:.85;
+}
+.opening__to-name{
+  display:block;
+  margin-top:.35rem;
+  font-family:var(--font-caps);
+  font-size:clamp(1rem, 4.6vw, 1.2rem);
+  letter-spacing:.06em;
+}
+.opening__footer{
+  position:absolute;
+  bottom:max(8vh, calc(env(safe-area-inset-bottom) + 2.5rem));
+  left:50%;
+  width:min(84vw, 24rem);
+  transform:translateX(-50%);
+  text-align:center;
+}
+.opening__names{
+  font-family:var(--font-script);
+  font-size:clamp(1.9rem, 8.5vw, 2.4rem);
+  line-height:1.2;
+  text-shadow:0 2px 8px rgba(20,0,0,.5);
+}
+.opening__names > span{ display:block; }
+.opening__names i{ font-style:normal; font-size:.8em; }
+.opening__hint{
+  margin-top:.8rem;
+  font-size:.64rem;
+  font-weight:500;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  animation:hint-breathe 2.6s ease-in-out infinite;
+}
+@keyframes hint-breathe{ 0%,100%{ opacity:.5; } 50%{ opacity:1; } }
+
+/* ---------------------------------------------------------------------
+   WAX SEAL — two halves (so it can break apart), pressed initials and
+   an idle glint that invites a tap.
+   --------------------------------------------------------------------- */
+.seal{
+  --seal-size:clamp(78px, 23vw, 96px);
+  position:absolute;
+  inset:0;
+  width:var(--seal-size);
+  height:var(--seal-size);
+  margin:auto; padding:0;
+  border:0;
+  background:none;
+  cursor:pointer;
+  touch-action:manipulation;
+}
+.seal:focus-visible{ outline-offset:6px; border-radius:50%; }
+.seal__half{
+  position:absolute; inset:0;
+  border-radius:49% 51% 47% 53% / 52% 48% 52% 48%;
+  background:
+    radial-gradient(circle at 50% 50%, transparent 54%, rgba(0,0,0,.18) 55%, transparent 58%, rgba(255,255,255,.08) 60%, transparent 63%),
+    radial-gradient(circle at 34% 28%, #b53140, #84141f 48%, #5c0a12 82%, #46060c 100%);
+  box-shadow:
+    inset 0 -5px 9px rgba(0,0,0,.35),
+    inset 0 4px 7px rgba(255,255,255,.16),
+    0 7px 16px rgba(10,0,0,.55);
+  will-change:transform;
+}
+.seal__half--left{ clip-path:inset(-20% 50% -20% -20%); }
+.seal__half--right{ clip-path:inset(-20% -20% -20% 50%); }
+.seal__letters{
+  position:absolute; inset:0;
+  display:grid; place-items:center;
+  font-family:var(--font-caps);
+  font-weight:700;
+  font-size:clamp(1.15rem, 5.4vw, 1.45rem);
+  letter-spacing:.04em;
+  color:rgba(255,214,200,.55);
+  text-shadow:-1px -1px 0 rgba(40,0,0,.55), 1px 1px 0 rgba(255,255,255,.18);
+  pointer-events:none;
+}
+.seal__glint{
+  position:absolute; inset:0;
+  border-radius:50%;
+  overflow:hidden;
+  pointer-events:none;
+}
+.seal__glint::before{
+  content:"";
+  position:absolute; inset:-30%;
+  background:linear-gradient(115deg, transparent 42%, rgba(255,236,205,.55) 50%, transparent 58%);
+  transform:translateX(-70%);
+  animation:seal-glint 3.6s var(--ease-soft) 1s infinite;
+}
+.seal__glint::after{                /* the small flare on the rim */
+  content:"";
+  position:absolute;
+  right:6%; bottom:14%;
+  width:22%; aspect-ratio:1;
+  border-radius:50%;
+  background:radial-gradient(circle, #fff 0%, rgba(255,226,170,.85) 22%, transparent 70%);
+  opacity:0;
+  animation:seal-flare 3.6s var(--ease-soft) 1s infinite;
+}
+@keyframes seal-glint{ 0%{ transform:translateX(-70%); } 35%,100%{ transform:translateX(70%); } }
+@keyframes seal-flare{ 0%,22%{ opacity:0; transform:scale(.4); } 32%{ opacity:1; transform:scale(1.2); } 48%,100%{ opacity:0; transform:scale(.6); } }
+
+.opening.is-opening .seal__glint,
+.opening.is-opening .opening__hint{ animation:none; }
+
+.opening__skip{
+  position:absolute;
+  right:max(16px, env(safe-area-inset-right));
+  bottom:max(16px, env(safe-area-inset-bottom));
+  padding:.6rem .9rem;
+  border:1px solid rgba(255,250,243,.45);
+  border-radius:999px;
+  background:rgba(40,0,0,.35);
+  font-size:.62rem;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  cursor:pointer;
+}

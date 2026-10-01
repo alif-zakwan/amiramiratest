@@ -9,11 +9,13 @@
  * ---------------------------------------------------------------
  */
 
-return [
+$config = [
 
     // ---- Page / browser tab ------------------------------------
+    // site_title + og_description are what WhatsApp/Telegram show
+    // when the link is shared.
     'site_title'   => 'Amira & Arif | Walimatulurus',
-    'og_description' => 'Anda dijemput hadir ke majlis perkahwinan Amira & Anwar, Sabtu 28 November 2026.',
+    'og_description' => 'Anda dijemput hadir ke majlis perkahwinan Amira & Arif, Sabtu 28 November 2026.',
 
     // ---- The couple ----------------------------------------------
     'bride_short'  => 'Amira Arezan',
@@ -23,7 +25,7 @@ return [
     'groom_short'  => 'Anwar Arif',
     'groom_full'   => 'Anwar Arif',
 
-    'monogram'     => 'A &amp; A',
+    // Initials pressed into the wax seal on the opening envelope.
     'wax_seal_letter' => 'AA',
 
     'tagline'      => 'Pertemuan Kejora dan Purnama',
@@ -39,8 +41,10 @@ return [
     'bride_relation_line' => 'dengan pilihan hatinya',
 
     // ---- Date & time ---------------------------------------------
-    // ISO format — used both for display and for the JS countdown.
+    // Local time at the venue — used for the countdown, together
+    // with 'timezone' below, so guests abroad count down correctly.
     'wedding_datetime' => '2026-11-28 11:00:00',
+    'timezone'         => 'Asia/Kuala_Lumpur',
     'wedding_day_my'   => 'Sabtu',
     'wedding_date_my'  => '28 November 2026',
 
@@ -74,12 +78,109 @@ return [
     'show_rsvp'   => true,
     'rsvp_deadline' => '14 November 2026',
 
+    // Where RSVPs are stored. Leave 'url' empty to keep them in data/rsvp.json
+    // (fine for XAMPP testing). To save them in a Google Sheet instead, follow
+    // docs/google-sheets-rsvp/SETUP.md and paste the web-app URL + secret here.
+    // On Render, prefer the RSVP_SHEET_URL / RSVP_SHEET_SECRET environment
+    // variables so the secret never goes into git.
+    'rsvp_sheet' => [
+        'url'    => '',
+        'secret' => '',
+    ],
+
     // ---- Hashtag / share -----------------------------------------
     'hashtag' => '#AmiraArifBersatu',
 
     // ---- Background music -------------------------------------------
     // Put an mp3 in assets/audio/ then point this at it, e.g.
     // 'assets/audio/wedding-song.mp3'. Leave blank to hide the music button.
+    // Music starts when the guest taps the wax seal (browsers block
+    // autoplay with sound before a tap).
     'music_file'  => '',
 
+    // ---- Experience ------------------------------------------------
+    // 'scroll' = one long scrolling card (the default)
+    // 'page'   = one card at a time, swipe / tap to turn the page
+    // Either can also be forced per link with ?mode=scroll or ?mode=page.
+    'experience' => [
+        'default_mode'       => 'scroll',
+        // Shows a small "Skrol / Halaman" switch so the two modes can be
+        // compared during client review. Set to false for the final link.
+        'show_mode_switcher' => true,
+    ],
+
+    // ---- Interface wording --------------------------------------------
+    // Every fixed label on the page, in one place.
+    'labels' => [
+        'to'               => 'Kepada',
+        'to_default'       => 'Tetamu Yang Dihormati',
+        'open_hint'        => 'Tekan meterai untuk membuka jemputan',
+        'open_aria'        => 'Buka jemputan',
+        'skip'             => 'Langkau',
+
+        'countdown_title'  => 'Menghitung Hari',
+        'countdown_days'   => 'Hari',
+        'countdown_hours'  => 'Jam',
+        'countdown_mins'   => 'Minit',
+        'countdown_secs'   => 'Saat',
+        'countdown_done'   => 'Tibanya hari yang dinanti-nantikan!',
+
+        'on'               => 'Pada',
+        'venue'            => 'Bertempat di',
+        'schedule'         => 'Aturcara Majlis',
+        'arrival'          => 'Ketibaan Pengantin',
+        'open_map'         => 'Buka di Google Maps',
+        'location_title'   => 'Lokasi Majlis',
+        'map_title'        => 'Peta lokasi majlis',
+        'contacts_title'   => 'Hubungi',
+
+        'rsvp_title'       => 'RSVP',
+        'rsvp_note'        => 'Sila sahkan kehadiran anda sebelum',
+        'rsvp_name'        => 'Nama',
+        'rsvp_attending'   => 'Kehadiran',
+        'rsvp_choose'      => 'Pilih satu',
+        'rsvp_yes'         => 'Akan hadir',
+        'rsvp_no'          => 'Tidak dapat hadir',
+        'rsvp_pax'         => 'Bilangan tetamu',
+        'rsvp_pax_unit'    => 'orang',
+        'rsvp_message'     => 'Ucapan & doa restu',
+        'rsvp_optional'    => '(pilihan)',
+        'rsvp_submit'      => 'Hantar',
+        'rsvp_sending'     => 'Menghantar…',
+        'rsvp_ok'          => 'Terima kasih! RSVP anda telah diterima.',
+        'rsvp_required'    => 'Sila lengkapkan nama dan kehadiran.',
+        'rsvp_failed'      => 'Maaf, sesuatu tidak kena. Cuba lagi.',
+        'rsvp_offline'     => 'Tidak dapat menghubungi pelayan. Cuba lagi sebentar.',
+
+        'wishes_title'     => 'Ucapan Tetamu',
+        'wishes_empty'     => 'Jadilah tetamu pertama menghantar ucapan!',
+        'wishes_yes'       => 'akan hadir',
+        'wishes_no'        => 'tidak dapat hadir',
+
+        'gift_title'       => 'Salam Kaut',
+        'gift_copy'        => 'Salin Nombor Akaun',
+        'gift_copied'      => 'Disalin!',
+
+        'thanks'           => 'Terima kasih kerana menjadi sebahagian daripada kegembiraan kami.',
+        'share'            => 'Kongsi Jemputan Ini',
+        'share_copied'     => 'Pautan disalin!',
+
+        'music_aria'       => 'Main / henti muzik',
+        'mode_label'       => 'Paparan',
+        'mode_scroll'      => 'Skrol',
+        'mode_page'        => 'Halaman',
+        'page_prev'        => 'Halaman sebelum',
+        'page_next'        => 'Halaman seterusnya',
+    ],
+
 ];
+
+// Private settings (the Google Sheet URL + secret) live in config.local.php,
+// which is NOT committed to git. Copy config.local.php.example to
+// config.local.php and fill it in. Anything set there overrides the above.
+$localFile = __DIR__ . '/config.local.php';
+if (is_file($localFile)) {
+    $config = array_replace_recursive($config, require $localFile);
+}
+
+return $config;

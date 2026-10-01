@@ -5,20 +5,20 @@
  *   php -S localhost:8000
  * then open http://localhost:8000/
  *
- * A guest's name can be personalised on the envelope via a link like:
- *   index.php?to=Puan+Salmah
+ * URL options:
+ *   ?to=Puan+Salmah   personalises the envelope ("Kepada")
+ *   ?mode=page        page-by-page experience (default comes from config)
  */
 
-$cfg = require __DIR__ . '/config/config.php';
-
-$guestName = '';
-if (isset($_GET['to'])) {
-    // Keep it short and strip anything unexpected; htmlspecialchars()
-    // happens again at print time in the includes, this is just a sanity trim.
-    $guestName = trim(substr($_GET['to'], 0, 60));
-}
+require __DIR__ . '/includes/bootstrap.php';
 
 include __DIR__ . '/includes/header.php';
-include __DIR__ . '/includes/envelope.php';
-include __DIR__ . '/includes/invitation.php';
+include __DIR__ . '/includes/opening.php';
+?>
+<main class="experience" id="experience" data-mode="<?= e($mode) ?>">
+<?php foreach ($sections as $index => $section): ?>
+<?php include __DIR__ . '/includes/sections/' . $section . '.php'; ?>
+<?php endforeach; ?>
+</main>
+<?php
 include __DIR__ . '/includes/footer.php';

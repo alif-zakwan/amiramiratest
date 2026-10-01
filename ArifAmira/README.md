@@ -40,65 +40,85 @@ http://localhost:8000/index.php?to=Puan+Salmah
 ## Editing the content
 
 **You should only ever need to open one file: `config/config.php`.**
-Every name, date, time, venue, contact number, quote and toggle
-(RSVP on/off, gift section on/off, background music) lives there with
-comments explaining each field.
+Every name, date, time, venue, contact number, quote, toggle (RSVP,
+gift section, music) and every fixed label on the page (`labels`) lives
+there with comments explaining each field.
+
+## Two experiences, one invitation
+
+| Link | Experience |
+|---|---|
+| `index.php` | the default from `experience.default_mode` in the config (`scroll`) |
+| `index.php?mode=scroll` | one long card, sections reveal as you scroll |
+| `index.php?mode=page` | one card at a time — swipe, tap ‹ ›, the diamonds, or use arrow keys |
+
+Both use exactly the same sections, content and styling. For client
+review a small **Skrol / Halaman** switch sits top-left; set
+`experience.show_mode_switcher` to `false` for the final link.
 
 ## Folder structure
 
 ```
 ArifAmira/
-├── index.php              Entry point — wires everything together
-├── rsvp.php                RSVP API (GET = list wishes, POST = submit one)
+├── index.php              Entry point: header → opening → sections → footer
+├── rsvp.php               RSVP API (GET = list wishes, POST = submit one)
+├── .htaccess              Blocks data/, config/, includes/ from the web
 ├── config/
-│   └── config.php          ← EDIT THIS: all wedding details live here
+│   └── config.php         ← EDIT THIS: all wedding details + labels
 ├── includes/
-│   ├── header.php           <head>, fonts, stylesheet, music button
-│   ├── envelope.php         The wax-seal envelope cover screen
-│   ├── invitation.php       All content sections (hero, formal text,
-│   │                        countdown, details, map, RSVP, wishes, gift)
-│   └── footer.php           Closes the page, loads main.js
+│   ├── bootstrap.php      Loads config, ?to= / ?mode=, section order, helpers
+│   ├── components.php     Reusable card pieces: frame, florals, divider, date line
+│   ├── header.php         <head>, fonts, ornament sprite, music + mode switch
+│   ├── opening.php        The sealed envelope
+│   ├── footer.php         Page-mode navigation, settings for JS, scripts
+│   └── sections/          One file per section, in this order:
+│                          cover, countdown, invitation, details, venue,
+│                          contacts, rsvp, wishes, gift (optional), closing
 ├── css/
-│   └── style.css            All styling & animation (one file, organised
-│                             by section, see the comment banners)
+│   ├── tokens.css         Colours, fonts, spacing — retheme from here
+│   ├── base.css           Reset, embossed paper background, shared type
+│   ├── components.css     Card frame, florals, ornaments, buttons, fields
+│   ├── sections.css       Per-section content styling
+│   ├── opening.css        Envelope, flaps, wax seal
+│   └── modes.css          Scroll vs page layout, page navigation
 ├── js/
-│   └── main.js               Envelope animation, countdown, scroll-reveal,
-│                             RSVP fetch calls, music toggle, share/copy
+│   ├── app.js             Entry: wires opening + mode + features
+│   ├── animations.js      Shared motions: reveal, leave, drifting blossom
+│   ├── opening.js         Envelope opening timeline
+│   ├── scroll-mode.js     Reveal-on-scroll, floral parallax
+│   ├── page-mode.js       Page turns, swipe/keys/dots
+│   ├── features.js        Countdown, RSVP + wishes, music, gift, share
+│   └── vendor/gsap.min.js GSAP 3.13 core (bundled, no CDN)
 ├── data/
-│   └── rsvp.json             RSVP submissions are appended here (auto-created)
+│   └── rsvp.json          RSVPs when no Google Sheet is set (and as a backup if Google is down; private)
 └── assets/
-    ├── images/                Drop your own photos / flower PNGs here (optional)
-    └── audio/                 Drop a background-music MP3 here (optional)
+    ├── images/            Emblem, floral sprays, paper + grain textures
+    └── audio/             Drop a background-music MP3 here (optional)
 ```
 
-## Dynamic / animated features included
+## What happens on the page
 
-- **Envelope intro** — wax seal cracks, the flap opens, the letter
-  rises away to reveal the invitation (`js/main.js` → `initEnvelope`).
-- **Live countdown** to the wedding date/time.
-- **Scroll‑reveal** — each section fades up into view as guests scroll.
-- **Floating petals** drifting gently in the background.
-- **RSVP form** — saved to `data/rsvp.json` via `rsvp.php`, no database
-  needed. Automatically re-renders below.
-- **Guest wishes wall** — every RSVP message appears publicly under the
-  form.
-- **Copy‑to‑clipboard** for the bank account number (gift section).
-- **Share‑this‑invitation** button (uses the native share sheet on
-  phones, falls back to "copy link").
-- **Background‑music toggle** (only shown once you add an mp3 and set
-  `music_file` in the config).
-- **Personalised guest name** via `?to=` in the URL.
+- **Opening** — a sealed burgundy envelope addressed to the guest. Tapping
+  the wax seal: the seal gives, breaks in two, the flaps slide apart,
+  the emblem holds in its oval for a beat, then lifts away as the cover
+  card appears (~2.7s, with a "Langkau" skip). Music starts on that tap
+  if one is configured.
+- **Cards** — the cover, invitation and details follow the printed card
+  (maroon panel, scooped corners, white keyline, white-and-gold sprays);
+  countdown, map, contacts, RSVP and wishes are ivory "insert cards".
+- **Reveals** — each card rises in, its sprays bloom, then each line comes
+  into focus in turn. Once per section in scroll mode; on every turn in
+  page mode. A single blossom drifts across the invitation card.
+- **Live countdown**, **RSVP** (saved to `data/rsvp.json`, with a hidden
+  spam trap), **wishes wall**, **copy bank account**, **share** (native
+  share sheet or copy link), **music toggle**, **`?to=` guest name**.
+- **Reduced motion** — if the phone asks for less motion, the envelope
+  simply opens and everything is shown without animation.
 
 ## Notes on the design
 
-Colours, type and layout follow the reference card you shared: deep
-burgundy (`--maroon-…`) panels on cream paper, antique‑gold hairline
-framing, a script font for the couple's names, `Playfair Display` for
-formal headings and `Cormorant Garamond` for body text. All of this
-lives at the top of `css/style.css` as CSS custom properties, so you
-can retheme the whole site by changing a handful of values there.
-
-The florals, dove/ring emblem and dividers are drawn with CSS/SVG
-rather than exported PNGs, so the site works immediately with zero
-image assets. See `assets/images/README.txt` if you'd like to swap in
-your real Canva artwork later.
+Colours are sampled from the printed card (`#620909` maroon on ivory
+paper); type is Pinyon Script (names), Cinzel (engraved capitals),
+Montserrat (spaced-out body text) and Amiri (Arabic greeting). The floral
+sprays and emblem are the client's own artwork — see
+`assets/images/README.txt` for how to replace them with sharper exports.

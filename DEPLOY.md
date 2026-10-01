@@ -70,6 +70,10 @@ https://arifamira.onrender.com/?to=Puan+Salmah
   - swapping the RSVP storage to a small managed database (Render offers
     free/low-cost PostgreSQL) if you want it bullet-proof.
   Happy to wire either of these up if you'd like.
+  **Recommended instead: save RSVPs in a Google Sheet** — free, survives
+  redeploys, and the couple can open it on their phone. Follow
+  `docs/google-sheets-rsvp/SETUP.md`, then set `RSVP_SHEET_URL` and
+  `RSVP_SHEET_SECRET` in Render's Environment tab.
 
 ## Updating the site later
 
