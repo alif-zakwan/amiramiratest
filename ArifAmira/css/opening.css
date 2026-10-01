@@ -49,6 +49,19 @@
     var(--tex-grain) 0 0 / 128px 128px,
     linear-gradient(var(--flap-angle), #5a0909 0%, var(--maroon-deep) 70%, #380404 100%);
 }
+.opening__flap span::after{          /* embossed relief, like pressed velvet paper */
+  content:"";
+  position:absolute; inset:0;
+  background:var(--tex-paper) 0 0 / 220px 220px;
+  mix-blend-mode:soft-light;
+  opacity:.55;
+}
+.opening__flap span::before{         /* light catching the folds near the seal */
+  content:"";
+  position:absolute; inset:0;
+  background:radial-gradient(ellipse 60% 38% at 50% 50%, rgba(255,214,200,.16), transparent 70%);
+  z-index:1;
+}
 .opening__flap--left{ --flap-angle:100deg; }
 .opening__flap--left span{ clip-path:polygon(0 -2%, 53% 50%, 0 102%); }
 .opening__flap--right{ --flap-angle:260deg; }
@@ -69,7 +82,7 @@
    an idle glint that invites a tap.
    --------------------------------------------------------------------- */
 .seal{
-  --seal-size:clamp(78px, 23vw, 96px);
+  --seal-size:clamp(116px, 34vw, 156px);
   position:absolute;
   inset:0;
   width:var(--seal-size);
@@ -85,12 +98,14 @@
   position:absolute; inset:0;
   border-radius:49% 51% 47% 53% / 52% 48% 52% 48%;
   background:
-    radial-gradient(circle at 50% 50%, transparent 54%, rgba(0,0,0,.18) 55%, transparent 58%, rgba(255,255,255,.08) 60%, transparent 63%),
-    radial-gradient(circle at 34% 28%, #b53140, #84141f 48%, #5c0a12 82%, #46060c 100%);
+    radial-gradient(circle at 50% 50%, transparent 0 62%, rgba(0,0,0,.30) 63%, rgba(255,255,255,.16) 65%, transparent 67%),  /* groove inside the raised rim */
+    radial-gradient(circle at 50% 50%, transparent 0 80%, rgba(0,0,0,.22) 88%, transparent 94%),                             /* rim falloff */
+    radial-gradient(circle at 34% 28%, #bd3645, #8a1622 46%, #5c0a12 82%, #46060c 100%);
   box-shadow:
-    inset 0 -5px 9px rgba(0,0,0,.35),
-    inset 0 4px 7px rgba(255,255,255,.16),
-    0 7px 16px rgba(10,0,0,.55);
+    inset 0 -6px 11px rgba(0,0,0,.38),
+    inset 0 5px 8px rgba(255,255,255,.2),
+    0 0 0 1px rgba(255,214,200,.12),
+    0 10px 22px rgba(10,0,0,.6);
   will-change:transform;
 }
 .seal__half--left{ clip-path:inset(-20% 50% -20% -20%); }
@@ -100,9 +115,9 @@
   display:grid; place-items:center;
   font-family:var(--font-caps);
   font-weight:700;
-  font-size:clamp(1.15rem, 5.4vw, 1.45rem);
+  font-size:clamp(1.75rem, 8.4vw, 2.3rem);
   letter-spacing:.04em;
-  color:rgba(255,214,200,.55);
+  color:rgba(255,214,200,.6);
   text-shadow:-1px -1px 0 rgba(40,0,0,.55), 1px 1px 0 rgba(255,255,255,.18);
   pointer-events:none;
 }
