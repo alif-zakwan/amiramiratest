@@ -107,7 +107,7 @@ ArifAmira/
 ## Notes on the design
 
 Colours are sampled from the printed card (`#620909` maroon on ivory
-paper); type is Pinyon Script (couple's names), Amiri (Arabic greeting)
-and Arial for all other text (a system font, set in `css/tokens.css`). The floral
+paper); type is Pinyon Script (names), Cinzel (engraved capitals),
+Montserrat (spaced-out body text) and Amiri (Arabic greeting). The floral
 sprays and emblem are the client's own artwork — see
 `assets/images/README.txt` for how to replace them with sharper exports.
