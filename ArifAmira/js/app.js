@@ -8,10 +8,12 @@
  *   page-mode.js   one card at a time, turned        (mode "page", off by default)
  *   animations.js  the shared reveal / leave / drift motions
  *   features.js    countdown, RSVP, music, gift, share
+ *   guestbook.js   Ucapan Tetamu: wishes form + swipeable notes
  */
 import { initOpening } from './opening.js';
 import { initScrollMode } from './scroll-mode.js';
 import { initCountdown, initRsvp, initMusic, initGift, initShare } from './features.js';
+import { initGuestbook } from './guestbook.js';
 
 const settings = JSON.parse(document.getElementById('appSettings').textContent);
 const labels = settings.labels;
@@ -38,5 +40,6 @@ initOpening({
 
 initCountdown();
 initRsvp(labels);
+initGuestbook(labels);
 initGift(labels);
 initShare(labels);

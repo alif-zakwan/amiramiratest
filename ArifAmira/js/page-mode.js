@@ -40,7 +40,7 @@ export function initPageMode(sections) {
   // ---- swipe ---------------------------------------------------------
   let start = null;
   stage.addEventListener('pointerdown', (event) => {
-    if (event.target.closest('input, select, textarea, iframe')) return;
+    if (event.target.closest('input, select, textarea, iframe, [data-no-swipe]')) return;
     start = { x: event.clientX, y: event.clientY };
   });
   stage.addEventListener('pointerup', (event) => {

@@ -32,14 +32,10 @@ section_open('rsvp', 'ivory', $cfg['labels']['rsvp_title'] ?? '', 'accent-left')
             <?php endfor; ?>
         </select>
     </label>
-    <label class="field">
-        <span class="field__label"><?= t('rsvp_message') ?> <em><?= t('rsvp_optional') ?></em></span>
-        <textarea id="rsvpMessage" name="message" rows="3" maxlength="240"></textarea>
-    </label>
     <label class="field field--trap" aria-hidden="true">
         Website <input type="text" name="website" tabindex="-1" autocomplete="off">
     </label>
-    <p class="rsvp-form__status" id="rsvpStatus" role="status" aria-live="polite"></p>
+    <p class="form-status" id="rsvpStatus" role="status" aria-live="polite"></p>
     <button type="submit" class="btn btn--solid" id="rsvpSubmit"><?= t('rsvp_submit') ?></button>
 </form>
 <?php section_close(); ?>

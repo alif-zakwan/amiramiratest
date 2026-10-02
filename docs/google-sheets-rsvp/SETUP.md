@@ -1,8 +1,12 @@
-# Save RSVPs in a Google Sheet
+# Save RSVPs and guestbook wishes in a Google Sheet
 
 About 10 minutes, one time. Every RSVP then lands in a spreadsheet the
 couple can open on their phone, and nothing is lost when the website
-redeploys. A summary tab counts how many people are coming.
+redeploys. Tabs in the sheet:
+
+- **RSVP** — name, attending, number of guests (private, never shown on the site)
+- **Ringkasan** — totals: how many people are coming
+- **Ucapan Tetamu** — the guestbook wishes shown on the invitation
 
 ## 1. Create the sheet and the script
 
@@ -55,22 +59,41 @@ Render redeploys automatically.
 2. Open the sheet: a tab called **RSVP** now has the entry (the tab and
    its headings are created on the first RSVP). The **Ringkasan** tab
    shows the totals.
-3. Reload the invitation: the message appears on the wishes wall.
+3. In **Ucapan Tetamu** on the invitation, leave a wish. A tab called
+   **Ucapan Tetamu** appears in the sheet with it, and the wish shows up
+   as a note on the invitation.
+
+## Already set this up before? Update the script (2 minutes)
+
+The guestbook needs the newer `Code.gs`. Until you update it, wishes are
+still saved (on the website server) but not in the sheet, and nothing is
+written to the wrong tab.
+
+1. In the sheet: **Extensions → Apps Script**.
+2. Replace all the code with the new `Code.gs` and set `SECRET` to **the
+   same phrase as before**. Save.
+3. **Deploy → Manage deployments → ✏️ (edit) → Version: New version → Deploy.**
+   The web-app URL stays the same, so nothing needs changing on Render or
+   in `config.local.php`.
 
 ## Good to know
 
 - **Editing the script later:** after any change to `Code.gs`, use
   **Deploy → Manage deployments → ✏️ → Version: New version → Deploy**.
   The URL stays the same.
-- **Safety net:** if Google can't be reached at that moment, the RSVP is
-  saved on the server (`data/rsvp.json`) instead of being lost. On Render
+- **Safety net:** if Google can't be reached at that moment, the RSVP or
+  wish is saved on the server (`data/rsvp.json` / `data/ucapan.json`) instead
+  of being lost. On Render
   free that file is wiped on redeploy, so check the sheet for gaps after
   any outage.
-- **Wishes wall speed:** it refreshes at most every 30 seconds, since
-  Google answers more slowly than a local file.
-- **Privacy:** the sheet stores name, attendance, number of guests,
-  message and time — no IP addresses. Share the sheet only with the
-  couple and family.
+- **Guestbook speed:** the list of wishes refreshes at most every 30
+  seconds, since Google answers more slowly than a local file.
+- **Removing a wish:** delete its row in the **Ucapan Tetamu** tab; it
+  disappears from the invitation within about 30 seconds.
+- **Privacy:** RSVPs are never shown on the invitation. The sheet stores
+  name, attendance, number of guests and time (RSVP tab), and name,
+  message and time (guestbook tab) — no IP addresses. Share the sheet
+  only with the couple and family.
 - **Spreadsheet safety:** entries are stored as plain text, so a guest
   typing something like `=IMPORTXML(...)` can't run anything.
 - **If it doesn't work on XAMPP** and the PHP error log mentions an SSL

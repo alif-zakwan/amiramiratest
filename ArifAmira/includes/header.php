@@ -37,6 +37,7 @@ $arabicFontUrl = 'https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&di
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/components.css">
 <link rel="stylesheet" href="css/sections.css">
+<link rel="stylesheet" href="css/guestbook.css">
 <link rel="stylesheet" href="css/opening.css">
 <link rel="stylesheet" href="css/modes.css">
 </head>
@@ -71,6 +72,11 @@ $arabicFontUrl = 'https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&di
       <path d="M8 44c0 7 4.5 11 8.4 8.5 3-2 2-6.6-1.4-6" stroke-width="1.2"/>
       <path d="M16 40c0-13 11-24 24-24" stroke-width=".7" opacity=".55"/>
     </g>
+  </symbol>
+
+  <!-- small outlined heart, the guestbook notes' ornament -->
+  <symbol id="ornament-heart" viewBox="0 0 24 24">
+    <path d="M12 20.5s-8.2-5-8.2-11A4.6 4.6 0 0 1 12 6.8a4.6 4.6 0 0 1 8.2 2.7c0 6-8.2 11-8.2 11z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
   </symbol>
 
   <!-- four-point sparkle, as on the card's frame -->

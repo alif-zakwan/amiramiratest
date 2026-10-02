@@ -46,7 +46,6 @@ html[data-mode="page"] body{ height:100%; overflow:hidden; overscroll-behavior:n
   scrollbar-width:none;
 }
 [data-mode="page"] .card__body::-webkit-scrollbar{ display:none; }
-[data-mode="page"] .wishes-list{ max-height:none; overflow:visible; }
 
 /* page navigation: ‹  ◆ ◇ ◇ ◇  › */
 .page-nav{

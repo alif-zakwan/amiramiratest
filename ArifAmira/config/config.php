@@ -9,7 +9,7 @@
  * ---------------------------------------------------------------
  */
 
-$config = [
+return [
 
     // ---- Page / browser tab ------------------------------------
     // site_title + og_description are what WhatsApp/Telegram show
@@ -59,10 +59,7 @@ $config = [
     'map_embed_src' => 'https://www.google.com/maps?q=Dewan+Orang+Ramai+Renggam+Johor&output=embed',
     'map_link'      => 'https://www.google.com/maps/search/?api=1&query=Dewan+Orang+Ramai+Renggam+Johor',
 
-    // ---- Contacts (name => phone) --------------------------------
-    // Each contact gets a Call and a WhatsApp button. WhatsApp needs the
-    // country code, so a number starting with 0 is turned into 60... (Malaysia).
-    'whatsapp_country_code' => '60',
+    // ---- Contacts (name => phone, digits only for the tel: link) --
     'contacts' => [
         ['name' => 'Norizam', 'phone' => '011-55059882'],
         ['name' => 'Liza',    'phone' => '012-7240005'],
@@ -87,37 +84,37 @@ $config = [
     // On Render, prefer the RSVP_SHEET_URL / RSVP_SHEET_SECRET environment
     // variables so the secret never goes into git.
     'rsvp_sheet' => [
-        'url'    => '',
-        'secret' => '',
+        'url'    => 'https://script.google.com/macros/s/AKfycbyE_RdRQD0jBsbGFbNiajND1-6Ff9xIrkge6YHOwoG--PEQDLMCdp7wTfwDpmdMVtYtlQ/exec',
+        'secret' => 'alif_zakwan_bin_azman',
     ],
+
+    // ---- Hashtag / share -----------------------------------------
+    'hashtag' => '#AmiraArifBersatu',
 
     // ---- Background music -------------------------------------------
     // Put an mp3 in assets/audio/ then point this at it, e.g.
     // 'assets/audio/wedding-song.mp3'. Leave blank to hide the music button.
     // Music starts when the guest taps the wax seal (browsers block
     // autoplay with sound before a tap).
-    'music_file'  => 'assets/audio/music_file.mp3',
-    // Second of the song where playback begins (and where it restarts when it
-    // loops). 30 = start at 0:30. Use 0 to play from the beginning.
-    'music_start' => 0,
+    'music_file'  => '',
 
     // ---- Experience ------------------------------------------------
-    // 'scroll' = one long scrolling card (the client's choice)
+    // 'scroll' = one long scrolling card (the default)
     // 'page'   = one card at a time, swipe / tap to turn the page
-    //            (built, but switched off)
-    // Only modes listed in 'allowed_modes' can be used; a link with
-    // ?mode=page is ignored unless 'page' is listed. To bring page mode
-    // back for a demo: allowed_modes => ['scroll', 'page'] and
-    // show_mode_switcher => true.
+    // Either can also be forced per link with ?mode=scroll or ?mode=page.
     'experience' => [
         'default_mode'       => 'scroll',
-        'allowed_modes'      => ['scroll'],
-        'show_mode_switcher' => false,
+        // Shows a small "Skrol / Halaman" switch so the two modes can be
+        // compared during client review. Set to false for the final link.
+        'show_mode_switcher' => true,
     ],
 
     // ---- Interface wording --------------------------------------------
     // Every fixed label on the page, in one place.
     'labels' => [
+        'to'               => 'Kepada',
+        'to_default'       => 'Tetamu Yang Dihormati',
+        'open_hint'        => 'Tekan meterai untuk membuka jemputan',
         'open_aria'        => 'Buka jemputan',
         'skip'             => 'Langkau',
 
@@ -136,8 +133,6 @@ $config = [
         'location_title'   => 'Lokasi Majlis',
         'map_title'        => 'Peta lokasi majlis',
         'contacts_title'   => 'Hubungi',
-        'contact_call'     => 'Panggil',
-        'contact_whatsapp' => 'WhatsApp',
 
         'rsvp_title'       => 'RSVP',
         'rsvp_note'        => 'Sila sahkan kehadiran anda sebelum',
@@ -179,13 +174,3 @@ $config = [
     ],
 
 ];
-
-// Private settings (the Google Sheet URL + secret) live in config.local.php,
-// which is NOT committed to git. Copy config.local.php.example to
-// config.local.php and fill it in. Anything set there overrides the above.
-$localFile = __DIR__ . '/config.local.php';
-if (is_file($localFile)) {
-    $config = array_replace_recursive($config, require $localFile);
-}
-
-return $config;

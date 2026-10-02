@@ -1,5 +1,5 @@
 /**
- * The invitation's working parts — countdown, RSVP + wishes wall,
+ * The invitation's working parts — countdown, RSVP,
  * music, gift account copy, share. Behaviour is unchanged from the
  * original main.js; wording now comes from config 'labels'.
  */
@@ -37,7 +37,7 @@ export function initCountdown() {
 }
 
 /* ---------------------------------------------------------------
-   RSVP form — POSTs JSON to rsvp.php, then re-renders the wishes wall
+   RSVP form — POSTs JSON to rsvp.php (RSVPs are private; nothing is listed back)
 --------------------------------------------------------------- */
 export function initRsvp(labels) {
   const form = document.getElementById('rsvpForm');
@@ -59,15 +59,12 @@ export function initRsvp(labels) {
   attending.addEventListener('change', syncPaxField);
   form.addEventListener('reset', () => setTimeout(syncPaxField));
 
-  loadWishes();
-
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     const payload = {
       name: form.elements.name.value.trim(),
       attending: form.elements.attending.value,
       pax: attending.value === 'hadir' ? pax.value : 0,
-      message: form.elements.message.value.trim(),
       website: form.elements.website.value,
     };
 
@@ -89,7 +86,6 @@ export function initRsvp(labels) {
         if (data.ok) {
           setStatus(labels.rsvp_ok, 'ok');
           form.reset();
-          renderWishes(data.wishes);
         } else {
           setStatus(data.error || labels.rsvp_failed, 'error');
         }
@@ -104,42 +100,6 @@ export function initRsvp(labels) {
   function setStatus(message, state) {
     status.textContent = message;
     status.setAttribute('data-state', state);
-  }
-
-  function loadWishes() {
-    fetch('rsvp.php')
-      .then((response) => response.json())
-      .then((data) => { if (data.ok) renderWishes(data.wishes); })
-      .catch(() => { /* the wishes wall is decorative — fail quietly */ });
-  }
-
-  function renderWishes(wishes) {
-    const list = document.getElementById('wishesList');
-    if (!list) return;
-    list.replaceChildren();
-
-    if (!wishes || !wishes.length) {
-      const empty = document.createElement('li');
-      empty.className = 'wishes-list__empty';
-      empty.textContent = labels.wishes_empty;
-      list.appendChild(empty);
-      return;
-    }
-
-    wishes.slice(0, 30).forEach((wish) => {
-      const item = document.createElement('li');
-      const name = document.createElement('strong');
-      name.textContent = wish.name;
-      const attending = document.createElement('small');
-      attending.textContent = wish.attending === 'hadir' ? labels.wishes_yes : labels.wishes_no;
-      item.append(name, attending);
-      if (wish.message) {
-        const message = document.createElement('p');
-        message.textContent = wish.message;
-        item.appendChild(message);
-      }
-      list.appendChild(item);
-    });
   }
 }
 

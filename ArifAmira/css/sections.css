@@ -209,39 +209,12 @@
 }
 
 /* ---------------------------------------------------------------------
-   RSVP + WISHES
+   RSVP
    --------------------------------------------------------------------- */
 .rsvp-form{ display:grid; gap:1rem; }
-.rsvp-form__status{ min-height:1.3em; font-size:.85rem; text-align:center; }
-.rsvp-form__status[data-state="ok"]{ color:#2f6b3c; }
-.rsvp-form__status[data-state="error"]{ color:#a3242a; }
-
-.wishes-list{
-  list-style:none; margin:0; padding:0 .2rem;
-  max-height:22rem;
-  overflow-y:auto;
-  overscroll-behavior:contain;
-  text-align:left;
-}
-.wishes-list li{ padding:.9rem 0; border-bottom:1px solid var(--paper-edge); }
-.wishes-list li:last-child{ border-bottom:0; }
-.wishes-list strong{
-  display:block;
-  font-family:var(--font-caps);
-  font-weight:600;
-  font-size:.88rem;
-  letter-spacing:.04em;
-  color:var(--maroon);
-}
-.wishes-list small{
-  font-size:.62rem;
-  font-weight:600;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:var(--ink-soft);
-}
-.wishes-list p{ margin-top:.35rem; font-size:.88rem; line-height:1.55; }
-.wishes-list .wishes-list__empty{ text-align:center; font-style:italic; color:var(--ink-soft); border:0; }
+.form-status{ min-height:1.3em; font-size:.85rem; text-align:center; }
+.form-status[data-state="ok"]{ color:#2f6b3c; }
+.form-status[data-state="error"]{ color:#a3242a; }
 
 /* ---------------------------------------------------------------------
    GIFT

@@ -50,13 +50,15 @@ to show the small Skrol / Halaman switch); then `?mode=page` works.
 ```
 ArifAmira/
 ├── index.php              Entry point: header → opening → sections → footer
-├── rsvp.php               RSVP API (GET = list wishes, POST = submit one)
+├── rsvp.php               RSVP API (POST only; RSVPs are private, never listed)
+├── guestbook.php          Ucapan Tetamu API (GET = list wishes, POST = add one)
 ├── .htaccess              Blocks data/, config/, includes/ from the web
 ├── config/
 │   └── config.php         ← EDIT THIS: all wedding details + labels
 ├── includes/
 │   ├── bootstrap.php      Loads config, ?mode=, section order, helpers
 │   ├── components.php     Reusable card pieces: frame, florals, divider, date line
+│   ├── store.php          Storage shared by rsvp.php + guestbook.php (Google Sheet / local file)
 │   ├── header.php         <head>, fonts, ornament sprite, music + mode switch
 │   ├── opening.php        The sealed envelope
 │   ├── footer.php         Settings for JS, scripts (+ page-mode navigation when enabled)
@@ -68,6 +70,7 @@ ArifAmira/
 │   ├── base.css           Reset, embossed paper background, shared type
 │   ├── components.css     Card frame, florals, ornaments, buttons, fields
 │   ├── sections.css       Per-section content styling
+│   ├── guestbook.css      Ucapan Tetamu: form, paper notes, swipe row
 │   ├── opening.css        Envelope, flaps, wax seal
 │   └── modes.css          Scroll vs page layout, page navigation
 ├── js/
@@ -76,10 +79,12 @@ ArifAmira/
 │   ├── opening.js         Envelope opening timeline
 │   ├── scroll-mode.js     Reveal-on-scroll, floral parallax
 │   ├── page-mode.js       Page turns, swipe/keys/dots (loaded only if page mode is enabled) (only loaded if page mode is enabled)
-│   ├── features.js        Countdown, RSVP + wishes, music, gift, share
+│   ├── features.js        Countdown, RSVP, music, gift, share
+│   ├── guestbook.js       Ucapan Tetamu: wishes form + swipeable notes
 │   └── vendor/gsap.min.js GSAP 3.13 core (bundled, no CDN)
 ├── data/
-│   └── rsvp.json          RSVPs when no Google Sheet is set (and as a backup if Google is down; private)
+│   └── rsvp.json / ucapan.json   RSVPs / guestbook wishes when no Google Sheet is set
+│                          (and as a backup if Google is down; private)
 └── assets/
     ├── images/            Emblem, floral sprays, paper + grain textures
     └── audio/             Drop a background-music MP3 here (optional)

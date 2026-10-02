@@ -5,7 +5,8 @@
  */
 $jsLabels = array_intersect_key($cfg['labels'], array_flip([
     'rsvp_submit', 'rsvp_sending', 'rsvp_ok', 'rsvp_required', 'rsvp_failed', 'rsvp_offline',
-    'wishes_empty', 'wishes_yes', 'wishes_no', 'gift_copied', 'share_copied',
+    'gb_submit', 'gb_sending', 'gb_ok', 'gb_name_required', 'gb_message_required', 'gb_failed', 'gb_offline',
+    'gb_prev', 'gb_next', 'gift_copied', 'share_copied',
 ]));
 ?>
 <?php if ($mode === 'page'): ?>
