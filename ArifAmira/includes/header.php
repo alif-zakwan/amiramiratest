@@ -98,7 +98,7 @@ $arabicFontUrl = 'https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&di
 <div class="paper-backdrop" aria-hidden="true"></div>
 
 <?php if (!empty($cfg['music_file'])): ?>
-<audio id="bgMusic" src="<?= e($cfg['music_file']) ?>" loop preload="none"></audio>
+<audio id="bgMusic" src="<?= e($cfg['music_file']) ?>" data-start="<?= max(0, (int) ($cfg['music_start'] ?? 0)) ?>" preload="none"></audio>
 <button id="musicToggle" class="music-toggle" type="button" aria-label="<?= t('music_aria') ?>" aria-pressed="false">
     <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
         <path fill="currentColor" d="M9 18V5l12-2v13"/>

@@ -18,9 +18,9 @@ section_open('invitation', 'maroon', $cfg['bride_full'] . ' & ' . $cfg['groom_fu
 
 <?php divider(); ?>
 
-<p class="formal__name" data-anim="item"><?= e($cfg['bride_full']) ?></p>
+<p class="formal__name formal__name--script" data-anim="item"><?= e($cfg['bride_full']) ?></p>
 <p class="caps-text caps-text--relation" data-anim="item"><?= e($cfg['bride_relation_line']) ?></p>
-<p class="formal__name" data-anim="item"><?= e($cfg['groom_full']) ?></p>
+<p class="formal__name formal__name--script" data-anim="item"><?= e($cfg['groom_full']) ?></p>
 
 <?php divider(); ?>
 

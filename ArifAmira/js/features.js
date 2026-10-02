@@ -153,6 +153,19 @@ export function initMusic() {
   const audio = document.getElementById('bgMusic');
   if (!button || !audio) return { startMusic() {} };
 
+  // The song begins at config 'music_start' (seconds) and, when it ends,
+  // loops back to that point rather than to 0:00.
+  const start = Number(audio.dataset.start) || 0;
+  if (start > 0) {
+    audio.addEventListener('loadedmetadata', () => {
+      if (audio.duration > start) audio.currentTime = start;
+    }, { once: true });
+  }
+  audio.addEventListener('ended', () => {
+    audio.currentTime = audio.duration > start ? start : 0;
+    audio.play().catch(() => button.setAttribute('aria-pressed', 'false'));
+  });
+
   const play = () => audio.play()
     .then(() => button.setAttribute('aria-pressed', 'true'))
     .catch(() => button.setAttribute('aria-pressed', 'false'));

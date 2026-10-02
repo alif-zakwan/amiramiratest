@@ -88,15 +88,15 @@ $config = [
         'secret' => '',
     ],
 
-    // ---- Hashtag / share -----------------------------------------
-    'hashtag' => '#AmiraArifBersatu',
-
     // ---- Background music -------------------------------------------
     // Put an mp3 in assets/audio/ then point this at it, e.g.
     // 'assets/audio/wedding-song.mp3'. Leave blank to hide the music button.
     // Music starts when the guest taps the wax seal (browsers block
     // autoplay with sound before a tap).
     'music_file'  => 'assets/audio/music_file.mp3',
+    // Second of the song where playback begins (and where it restarts when it
+    // loops). 30 = start at 0:30. Use 0 to play from the beginning.
+    'music_start' => 30,
 
     // ---- Experience ------------------------------------------------
     // 'scroll' = one long scrolling card (the client's choice)
