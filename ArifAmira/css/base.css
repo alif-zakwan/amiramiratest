@@ -25,7 +25,8 @@ body{
 }
 
 /* the page stays still behind the sealed envelope */
-.js:not(.is-opened) body{ overflow:hidden; }
+.js:not(.is-opened) body,
+.gb-modal-open body{ overflow:hidden; }
 
 img, svg{ display:block; max-width:100%; }
 /* the hidden attribute must win over component display rules (flex/grid) */

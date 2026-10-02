@@ -70,7 +70,7 @@ ArifAmira/
 │   ├── base.css           Reset, embossed paper background, shared type
 │   ├── components.css     Card frame, florals, ornaments, buttons, fields
 │   ├── sections.css       Per-section content styling
-│   ├── guestbook.css      Ucapan Tetamu: form, paper notes, swipe row
+│   ├── guestbook.css      Ucapan Tetamu: card stack, arrows, popup form
 │   ├── opening.css        Envelope, flaps, wax seal
 │   └── modes.css          Scroll vs page layout, page navigation
 ├── js/
@@ -80,7 +80,7 @@ ArifAmira/
 │   ├── scroll-mode.js     Reveal-on-scroll, floral parallax
 │   ├── page-mode.js       Page turns, swipe/keys/dots (loaded only if page mode is enabled) (only loaded if page mode is enabled)
 │   ├── features.js        Countdown, RSVP, music, gift, share
-│   ├── guestbook.js       Ucapan Tetamu: wishes form + swipeable notes
+│   ├── guestbook.js       Ucapan Tetamu: card stack (drag / fan / arrows) + popup form
 │   └── vendor/gsap.min.js GSAP 3.13 core (bundled, no CDN)
 ├── data/
 │   └── rsvp.json / ucapan.json   RSVPs / guestbook wishes when no Google Sheet is set
