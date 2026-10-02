@@ -88,9 +88,6 @@ $config = [
         'secret' => '',
     ],
 
-    // ---- Hashtag / share -----------------------------------------
-    'hashtag' => '#AmiraArifBersatu',
-
     // ---- Background music -------------------------------------------
     // Put an mp3 in assets/audio/ then point this at it, e.g.
     // 'assets/audio/wedding-song.mp3'. Leave blank to hide the music button.

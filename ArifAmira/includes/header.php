@@ -3,7 +3,7 @@
  * Renders <head>, the shared SVG ornament sprite, the paper background
  * and the fixed controls (music, mode switch). Expects bootstrap.php.
  */
-$fontsUrl = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@400;500;600&family=Pinyon+Script&display=swap';
+$fontsUrl = 'https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap';
 // Amiri is only used for the Arabic greeting, so request just those glyphs
 $arabicFontUrl = 'https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap&text=' . rawurlencode($cfg['greeting_arabic']);
 ?>
@@ -24,9 +24,8 @@ $arabicFontUrl = 'https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&di
 <link rel="icon" href="data:,">
 <script>document.documentElement.classList.replace('no-js', 'js');</script>
 
-<!-- Fonts, matched to the printed card:
-     Pinyon Script (couple's names), Cinzel (engraved capitals),
-     Montserrat (spaced-out body text), Amiri (Arabic greeting) -->
+<!-- Fonts: Pinyon Script (couple's names) and Amiri (Arabic greeting) are
+     downloaded; all other text uses Arial (a system font, see css/tokens.css) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="<?= e($fontsUrl) ?>">
