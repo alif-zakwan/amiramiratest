@@ -92,3 +92,13 @@ function section_close(): void
 {
     echo '</div></div></section>';
 }
+
+/** wa.me link for a phone number: 011-55059882 -> https://wa.me/601155059882 */
+function whatsapp_url(string $phone, string $countryCode): string
+{
+    $digits = preg_replace('/\D+/', '', $phone);
+    if (str_starts_with($digits, '0')) {
+        $digits = $countryCode . substr($digits, 1);
+    }
+    return 'https://wa.me/' . $digits;
+}

@@ -176,21 +176,37 @@
 /* ---------------------------------------------------------------------
    CONTACTS
    --------------------------------------------------------------------- */
-.contact-list{ list-style:none; margin:0; padding:0; display:grid; gap:.6rem; }
-.contact-list a{
-  display:flex; align-items:center; justify-content:center; flex-wrap:wrap;
-  gap:.2rem .5rem;
-  min-height:3rem;
-  padding:.65rem 1rem;
+.contact-list{ list-style:none; margin:0; padding:0; display:grid; gap:.7rem; }
+.contact{
+  padding:.9rem 1rem;
   border:1px solid var(--paper-edge);
   background:rgba(255,255,255,.55);
-  text-decoration:none;
-  transition:background-color .25s var(--ease-soft);
 }
-.contact-list svg{ width:15px; height:15px; color:var(--maroon); flex:none; }
-.contact-list__phone{ font-weight:500; letter-spacing:.1em; }
-.contact-list__name{ font-size:.75rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); }
-@media (hover:hover){ .contact-list a:hover{ background:#fff; } }
+.contact__info{ margin:0 0 .7rem; }
+.contact__phone{ font-weight:500; letter-spacing:.1em; }
+.contact__name{ margin-left:.4rem; font-size:.75rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); }
+.contact__actions{ display:grid; grid-template-columns:1fr 1fr; gap:.5rem; }
+.contact__btn{
+  display:flex; align-items:center; justify-content:center; gap:.45rem;
+  min-height:2.8rem;
+  padding:.5rem .6rem;
+  border:1px solid var(--maroon);
+  border-radius:2px;
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  text-decoration:none;
+  transition:background-color .25s var(--ease-soft), color .25s var(--ease-soft), transform .15s var(--ease-soft);
+}
+.contact__btn:active{ transform:scale(.97); }
+.contact__btn svg{ width:16px; height:16px; flex:none; }
+.contact__btn--call{ color:var(--maroon); background:transparent; }
+.contact__btn--whatsapp{ color:#fff; background:#1f9d55; border-color:#1f9d55; }
+@media (hover:hover){
+  .contact__btn--call:hover{ background:var(--maroon); color:var(--ivory); }
+  .contact__btn--whatsapp:hover{ background:#187a43; border-color:#187a43; }
+}
 
 /* ---------------------------------------------------------------------
    RSVP + WISHES

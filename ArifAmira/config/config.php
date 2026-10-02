@@ -59,7 +59,10 @@ $config = [
     'map_embed_src' => 'https://www.google.com/maps?q=Dewan+Orang+Ramai+Renggam+Johor&output=embed',
     'map_link'      => 'https://www.google.com/maps/search/?api=1&query=Dewan+Orang+Ramai+Renggam+Johor',
 
-    // ---- Contacts (name => phone, digits only for the tel: link) --
+    // ---- Contacts (name => phone) --------------------------------
+    // Each contact gets a Call and a WhatsApp button. WhatsApp needs the
+    // country code, so a number starting with 0 is turned into 60... (Malaysia).
+    'whatsapp_country_code' => '60',
     'contacts' => [
         ['name' => 'Norizam', 'phone' => '011-55059882'],
         ['name' => 'Liza',    'phone' => '012-7240005'],
@@ -96,7 +99,7 @@ $config = [
     'music_file'  => 'assets/audio/music_file.mp3',
     // Second of the song where playback begins (and where it restarts when it
     // loops). 30 = start at 0:30. Use 0 to play from the beginning.
-    'music_start' => 30,
+    'music_start' => 0,
 
     // ---- Experience ------------------------------------------------
     // 'scroll' = one long scrolling card (the client's choice)
@@ -133,6 +136,8 @@ $config = [
         'location_title'   => 'Lokasi Majlis',
         'map_title'        => 'Peta lokasi majlis',
         'contacts_title'   => 'Hubungi',
+        'contact_call'     => 'Panggil',
+        'contact_whatsapp' => 'WhatsApp',
 
         'rsvp_title'       => 'RSVP',
         'rsvp_note'        => 'Sila sahkan kehadiran anda sebelum',
