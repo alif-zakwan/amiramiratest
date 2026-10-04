@@ -9,11 +9,13 @@
  *   animations.js  the shared reveal / leave / drift motions
  *   features.js    countdown, RSVP, music, gift, share
  *   guestbook.js   Ucapan Tetamu: wishes form + swipeable notes
+ *   petals.js      an occasional falling blossom once the invitation is open
  */
 import { initOpening } from './opening.js';
 import { initScrollMode } from './scroll-mode.js';
 import { initCountdown, initRsvp, initMusic, initGift, initShare, initMapApps } from './features.js';
 import { initGuestbook } from './guestbook.js';
+import { initPetals } from './petals.js';
 
 const settings = JSON.parse(document.getElementById('appSettings').textContent);
 const labels = settings.labels;
@@ -30,6 +32,7 @@ initOpening({
   onReveal: () => experience.revealCover(),
   onDone: () => {
     document.documentElement.classList.add('is-opened');
+    initPetals();
     const heading = sections[0].querySelector('h1');
     if (heading) {
       heading.setAttribute('tabindex', '-1');

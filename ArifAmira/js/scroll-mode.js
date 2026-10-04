@@ -1,6 +1,6 @@
 /**
- * Scroll mode: sections reveal once as they scroll into view, and the
- * floral sprays drift a few pixels against the scroll for depth.
+ * Scroll mode: sections reveal once as they scroll into view (see
+ * animations.js), with a little scroll-linked depth on the decoration.
  */
 import { animateReveal, prepareReveal, canAnimate } from './animations.js';
 
@@ -17,7 +17,7 @@ export function initScrollMode(sections) {
     revealCover() {
       animateReveal(cover);
       observeSections(rest);
-      if (canAnimate) initFloralParallax();
+      if (canAnimate) initParallax();
     },
   };
 }
@@ -37,10 +37,15 @@ function observeSections(sections) {
   sections.forEach((section) => observer.observe(section));
 }
 
-/** Gentle parallax on the floral sets (transform only, rAF-throttled). */
-function initFloralParallax() {
-  const sets = Array.from(document.querySelectorAll('.florals'));
-  if (!sets.length) return;
+/**
+ * Gentle scroll-linked depth (transform only, one rAF-throttled listener):
+ *  - the corner flowers and the ghost emblem on the invitation card shift a few
+ *    pixels as they cross the screen
+ *  - the embossed sprays on the paper background drift slower than the page
+ */
+function initParallax() {
+  const sets = Array.from(document.querySelectorAll('.florals, .watermark'));
+  const backdrop = document.querySelector('.paper-backdrop');
 
   let viewport = window.innerHeight;
   let queued = false;
@@ -51,9 +56,15 @@ function initFloralParallax() {
       const rect = set.getBoundingClientRect();
       if (rect.bottom < -100 || rect.top > viewport + 100) return;
       const fromCentre = rect.top + rect.height / 2 - viewport / 2;
-      const offset = Math.max(-14, Math.min(14, fromCentre * -0.03));
+      const strong = set.classList.contains('florals');
+      const offset = Math.max(strong ? -14 : -10, Math.min(strong ? 14 : 10, fromCentre * (strong ? -0.03 : 0.04)));
       set.style.setProperty('--parallax', offset.toFixed(1));
     });
+    if (backdrop) {
+      const range = document.documentElement.scrollHeight - viewport;
+      const progress = range > 0 ? window.scrollY / range : 0;
+      backdrop.style.setProperty('--bg-shift', ((0.5 - progress) * 70).toFixed(1));   // about +-35px over the whole page
+    }
   }
   function queue() {
     if (queued) return;

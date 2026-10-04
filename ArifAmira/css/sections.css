@@ -89,7 +89,7 @@
   overflow:hidden;
   pointer-events:none;
 }
-.watermark img{ width:min(115%, 26rem); max-width:none; opacity:.06; }
+.watermark img{ width:min(115%, 26rem); max-width:none; opacity:.06; transform:translateY(calc(var(--parallax, 0) * 1px)); }
 
 /* one blossom that drifts across while the card is in view (js) */
 .drift-blossom{

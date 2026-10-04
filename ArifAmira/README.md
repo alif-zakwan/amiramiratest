@@ -75,7 +75,8 @@ ArifAmira/
 │   └── modes.css          Scroll vs page layout, page navigation
 ├── js/
 │   ├── app.js             Entry: wires opening + mode + features
-│   ├── animations.js      Shared motions: reveal, leave, drifting blossom
+│   ├── animations.js      Shared motions: tiered reveal (names > key info > lines, dividers draw out), leave, drifting blossom
+│   ├── petals.js          An occasional falling blossom along the page edges (max 4 at once)
 │   ├── opening.js         Envelope opening timeline
 │   ├── scroll-mode.js     Reveal-on-scroll, floral parallax
 │   ├── page-mode.js       Page turns, swipe/keys/dots (loaded only if page mode is enabled) (only loaded if page mode is enabled)

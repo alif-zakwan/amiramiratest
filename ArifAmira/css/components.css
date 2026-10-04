@@ -340,3 +340,20 @@
 }
 .paper-dialog__close svg{ width:22px; height:22px; }
 @media (hover:hover){ .paper-dialog__close:hover{ background:rgba(98,9,9,.08); } }
+
+/* ---------------------------------------------------------------------
+   PETALS — a blossom now and then drifts down past the page
+   (js/petals.js). Above the cards, below the buttons and popups, and
+   never in the way of a tap.
+   --------------------------------------------------------------------- */
+.petal-layer{
+  position:fixed; inset:0;
+  z-index:30;
+  pointer-events:none;
+  overflow:hidden;
+}
+.petal{
+  position:absolute; top:0; left:0;
+  will-change:transform, opacity;
+}
+.petal img{ display:block; width:100%; height:auto; }

@@ -3,10 +3,17 @@
  * mode alike. Everything targets the data-anim hooks in the markup
  * (see includes/components.php), never specific wording.
  *
- *   card   → rises and fades in
- *   floral → blooms in after the card, slightly staggered
- *   item   → soft blur-to-focus, one line after another
+ *   card   → rises and settles
+ *   floral → blooms in slowly after the card (low emphasis)
+ *   item   → content lines, in three strengths set by data-emph:
+ *              focus  couple's names: rise + settle + soft focus (highest)
+ *              high   key wedding info: rise + settle
+ *              (none) everything else: a short fade + rise
+ *            dividers draw outward from the centre
  *   drift  → a single blossom drifting across the card
+ *
+ * Only transform and opacity are animated (plus a small blur on the names),
+ * so it stays smooth on phones.
  */
 
 const gsap = window.gsap;
@@ -21,6 +28,13 @@ const parts = (section) => ({
   drift: section.querySelector('[data-anim="drift"]'),
 });
 
+/** How strongly each kind of line moves. gap = delay before the next line starts. */
+const EMPHASIS = {
+  focus: { y: 18, scale: 0.97, blur: 4, duration: 1.1, gap: 0.17 },
+  high:  { y: 16, scale: 1,    blur: 0, duration: 0.95, gap: 0.12 },
+  base:  { y: 12, scale: 1,    blur: 0, duration: 0.8,  gap: 0.09 },
+};
+
 /** Hide a section's animated parts so they can be revealed later. */
 export function prepareReveal(section) {
   if (!canAnimate) return;
@@ -29,8 +43,8 @@ export function prepareReveal(section) {
 }
 
 /**
- * Reveal a section: card, then florals, then content lines.
- * `enterX` (−1 / 0 / 1) slides the card in sideways, for page turns.
+ * Reveal a section: card, then florals, then content lines one after
+ * another. `enterX` (−1 / 0 / 1) slides the card in sideways, for page turns.
  */
 export function animateReveal(section, { enterX = 0 } = {}) {
   const { card, florals, items, drift } = parts(section);
@@ -42,21 +56,38 @@ export function animateReveal(section, { enterX = 0 } = {}) {
   const tl = gsap.timeline();
   if (card) {
     tl.fromTo(card,
-      { autoAlpha: 0, y: enterX ? 0 : 26, xPercent: enterX * 7, rotation: enterX * 1.2 },
-      { autoAlpha: 1, y: 0, xPercent: 0, rotation: 0, duration: 0.9, ease: 'power2.out' });
+      { autoAlpha: 0, y: enterX ? 0 : 26, scale: enterX ? 1 : 0.985, xPercent: enterX * 7, rotation: enterX * 1.2 },
+      { autoAlpha: 1, y: 0, scale: 1, xPercent: 0, rotation: 0, duration: 0.9, ease: 'power2.out' });
   }
-  if (florals.length) {
+  if (florals.length) {                                   // low emphasis: slow, a little later
     tl.fromTo(florals,
-      { autoAlpha: 0, scale: 0.86, y: 8 },
-      { autoAlpha: 1, scale: 1, y: 0, duration: 1.3, ease: 'power2.out', stagger: 0.12 },
-      0.25);
+      { autoAlpha: 0, scale: 0.92, y: 10 },
+      { autoAlpha: 1, scale: 1, y: 0, duration: 1.6, ease: 'power2.out', stagger: 0.18 },
+      0.4);
   }
-  if (items.length) {
-    tl.fromTo(items,
-      { autoAlpha: 0, y: 10, filter: 'blur(5px)' },
-      { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 0.8, ease: 'power2.out', stagger: 0.11, clearProps: 'filter' },
-      0.35);
-  }
+
+  let at = 0.35;
+  items.forEach((el) => {
+    if (el.matches('.divider')) {                         // low emphasis: draws outward
+      tl.fromTo(el,
+        { autoAlpha: 0, scaleX: 0.55, transformOrigin: '50% 50%' },
+        { autoAlpha: 1, scaleX: 1, duration: 0.9, ease: 'power2.out', clearProps: 'transform' },
+        at);
+      at += 0.08;
+      return;
+    }
+    const e = EMPHASIS[el.dataset.emph] || EMPHASIS.base;
+    const from = { autoAlpha: 0, y: e.y, scale: e.scale };
+    const to = { autoAlpha: 1, y: 0, scale: 1, duration: e.duration, ease: 'power2.out', clearProps: 'transform' };
+    if (e.blur) {
+      from.filter = `blur(${e.blur}px)`;
+      to.filter = 'blur(0px)';
+      to.clearProps = 'transform,filter';
+    }
+    tl.fromTo(el, from, to, at);
+    at += e.gap;
+  });
+
   if (drift) {
     tl.add(driftBlossom(drift, section), 1);
   }

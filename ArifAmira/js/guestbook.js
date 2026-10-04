@@ -47,6 +47,24 @@ export function initGuestbook(labels) {
   let shownIndex = -1;
   const view = { pos: 0, fan: 0 };       // pos: which card is in front (fractional while moving); fan: 0..1 spread
 
+  // the first time the stack scrolls into view, it deals itself in (the front card
+  // slides up from behind); not again, and not while someone is already dragging
+  let dealt = false;
+  let stackVisible = false;
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => {
+      stackVisible = entries[0].isIntersecting;
+      dealIn();
+    }, { threshold: 0.3 }).observe(stack);
+  }
+  function dealIn() {
+    if (dealt || !stackVisible || cards.length < 2 || !canAnimate || drag) return;
+    dealt = true;
+    view.pos = -0.7;
+    render();
+    glideTo(0, { duration: 0.8 });
+  }
+
   loadWishes();
   window.addEventListener('resize', () => { measure(); render(); });
 
@@ -183,11 +201,14 @@ export function initGuestbook(labels) {
     view.pos = 0;
     view.fan = 0;
     render();
+    if (dealNewest) dealt = true;                       // a new wish has its own entrance
     if (dealNewest && canAnimate && cards.length > 1) {
       // the newest wish slides up from behind the stack into the front
       view.pos = -0.9;
       render();
       glideTo(0, { duration: 0.55 });
+    } else {
+      dealIn();
     }
   }
 

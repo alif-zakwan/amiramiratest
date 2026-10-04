@@ -68,8 +68,8 @@ p{ margin:0; }
          drop-shadow(-1px -1px 0 rgba(255,255,255,.7)) drop-shadow(1.5px 1.5px 1px rgba(110,90,60,.35));
   opacity:.32;
 }
-.paper-backdrop::before{ top:-6%; left:-18%; transform:rotate(18deg); }
-.paper-backdrop::after{ bottom:-8%; right:-18%; transform:rotate(198deg); }
+.paper-backdrop::before{ top:-6%; left:-18%; transform:translateY(calc(var(--bg-shift, 0) * 1px)) rotate(18deg); }
+.paper-backdrop::after{ bottom:-8%; right:-18%; transform:translateY(calc(var(--bg-shift, 0) * -1px)) rotate(198deg); }
 
 /* ---------------------------------------------------------------------
    Shared typographic voices from the card

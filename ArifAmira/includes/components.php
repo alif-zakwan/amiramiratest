@@ -67,7 +67,7 @@ function date_line(string $modifier = ''): void
 {
     global $cfg;
     $class = 'date-line' . ($modifier !== '' ? ' date-line--' . $modifier : '');
-    echo '<p class="' . $class . '" data-anim="item">'
+    echo '<p class="' . $class . '" data-anim="item"' . (in_array($modifier, ['cover', 'details'], true) ? ' data-emph="high"' : '') . '>'
         . '<span>' . e($cfg['wedding_day_my']) . '</span>'
         . '<span class="date-line__bar" aria-hidden="true"></span>'
         . '<span>' . e($cfg['wedding_date_my']) . '</span>'

@@ -6,7 +6,7 @@ $units = ['days' => 'countdown_days', 'hours' => 'countdown_hours', 'mins' => 'c
 <h2 class="section-title" data-anim="item"><?= t('countdown_title') ?></h2>
 <?php divider('ink'); ?>
 
-<div class="countdown" id="countdownClock" data-target="<?= e($weddingIso) ?>" data-anim="item" role="timer">
+<div class="countdown" id="countdownClock" data-target="<?= e($weddingIso) ?>" data-anim="item" data-emph="high" role="timer">
     <?php foreach ($units as $unit => $label): ?>
     <div class="countdown__unit">
         <span class="countdown__num" data-unit="<?= $unit ?>">00</span>

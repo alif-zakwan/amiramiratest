@@ -8,9 +8,9 @@ section_open('cover', 'maroon', $cfg['bride_short'] . ' & ' . $cfg['groom_short'
 <img class="cover__emblem" data-anim="item" src="assets/images/emblem-doves.webp" alt="" width="368" height="368">
 
 <h1 class="names">
-    <span class="names__line" data-anim="item"><?= e($cfg['bride_short']) ?></span>
-    <span class="names__amp" data-anim="item">&amp;</span>
-    <span class="names__line" data-anim="item"><?= e($cfg['groom_short']) ?></span>
+    <span class="names__line" data-anim="item" data-emph="focus"><?= e($cfg['bride_short']) ?></span>
+    <span class="names__amp" data-anim="item" data-emph="focus">&amp;</span>
+    <span class="names__line" data-anim="item" data-emph="focus"><?= e($cfg['groom_short']) ?></span>
 </h1>
 
 <?php divider(); ?>
