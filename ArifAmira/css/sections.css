@@ -173,37 +173,26 @@
 .map-frame iframe{ display:block; width:100%; height:clamp(13rem, 60vw, 17rem); border:0; }
 .venue__address{ margin:1rem auto 1.2rem; max-width:28ch; font-size:.85rem; color:var(--ink-soft); }
 
-/* map apps: Google Maps full width, then Waze + Apple Maps side by side */
-.map-apps{ display:grid; grid-template-columns:1fr 1fr; gap:.55rem; }
-.map-apps__label{
-  grid-column:1 / -1;
-  margin:0;
-  font-size:.68rem;
-  font-weight:600;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  color:var(--ink-soft);
-}
-.map-apps__btn{
+/* the map-app choices inside the popup */
+.map-choices{ list-style:none; margin:0; padding:0; display:grid; gap:.6rem; }
+.map-choices__btn{
   display:flex; align-items:center; justify-content:center;
-  min-height:2.9rem;
-  padding:.5rem .7rem;
+  min-height:3rem;
+  padding:.5rem .8rem;
   border:1px solid var(--maroon);
   border-radius:2px;
   font-family:var(--font-caps);
-  font-size:.78rem;
+  font-size:.8rem;
   font-weight:600;
-  letter-spacing:.1em;
+  letter-spacing:.12em;
   text-transform:uppercase;
   text-decoration:none;
   color:var(--maroon);
   background:transparent;
   transition:background-color .25s var(--ease-soft), color .25s var(--ease-soft), transform .15s var(--ease-soft);
 }
-.map-apps__btn:active{ transform:scale(.97); }
-.map-apps__btn--wide{ grid-column:1 / -1; }
-.map-apps__btn--other{ border-style:dashed; }
-@media (hover:hover){ .map-apps__btn:hover{ background:var(--maroon); color:var(--ivory); } }
+.map-choices__btn:active{ transform:scale(.97); }
+@media (hover:hover){ .map-choices__btn:hover{ background:var(--maroon); color:var(--ivory); } }
 
 /* ---------------------------------------------------------------------
    CONTACTS

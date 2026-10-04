@@ -37,13 +37,13 @@ section_open('wishes', 'ivory', $cfg['labels']['gb_title'] ?? '', 'accent-right'
 </div>
 
 <!-- Popup: write a wish -->
-<dialog class="gb-dialog" id="gbDialog" aria-labelledby="gbDialogTitle">
-    <div class="gb-dialog__card">
-        <button class="gb-dialog__close" id="gbClose" type="button" aria-label="<?= t('gb_close') ?>">
+<dialog class="paper-dialog" id="gbDialog" aria-labelledby="gbDialogTitle">
+    <div class="paper-dialog__card">
+        <button class="paper-dialog__close" id="gbClose" type="button" aria-label="<?= t('gb_close') ?>">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg>
         </button>
         <svg class="note__heart" aria-hidden="true"><use href="#ornament-heart"/></svg>
-        <h3 class="gb-dialog__title" id="gbDialogTitle"><?= t('gb_dialog_title') ?></h3>
+        <h3 class="paper-dialog__title" id="gbDialogTitle"><?= t('gb_dialog_title') ?></h3>
 
         <form class="guestbook-form" id="guestbookForm" novalidate>
             <label class="field">

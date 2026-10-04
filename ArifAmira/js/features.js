@@ -3,6 +3,7 @@
  * music, gift account copy, share. Behaviour is unchanged from the
  * original main.js; wording now comes from config 'labels'.
  */
+import { wireDialog, openDialog } from './dialog.js';
 
 /* ---------------------------------------------------------------
    Countdown — target is ISO-8601 with the venue's UTC offset, so it
@@ -186,10 +187,29 @@ function flashLabel(button, text) {
 }
 
 /* ---------------------------------------------------------------
-   Map apps: the "choose another app" button uses a geo: link, which
-   only Android understands (it opens the phone's list of map apps)
+   Map apps — one button, "Buka di aplikasi peta".
+   Android understands geo: links and shows the phone's own list of map
+   apps. iPhone and computers don't, so they get a small popup with
+   Google Maps / Waze / Apple Maps. (Without JavaScript the button is
+   simply a Google Maps link.)
 --------------------------------------------------------------- */
 export function initMapApps() {
-  const other = document.getElementById('mapOther');
-  if (other && /android/i.test(navigator.userAgent)) other.hidden = false;
+  const button = document.getElementById('mapOpen');
+  const dialog = document.getElementById('mapDialog');
+  if (!button || !dialog) return;
+
+  if (/android/i.test(navigator.userAgent)) {
+    button.href = button.dataset.geo;
+    button.removeAttribute('target');
+    return;
+  }
+
+  wireDialog(dialog, document.getElementById('mapClose'));
+  button.addEventListener('click', (event) => {
+    event.preventDefault();
+    openDialog(dialog);
+  });
+  dialog.addEventListener('click', (event) => {           // choosing an app closes the popup
+    if (event.target.closest('.map-choices__btn')) setTimeout(() => dialog.close(), 150);
+  });
 }

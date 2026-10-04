@@ -10,11 +10,24 @@ section_open('venue', 'ivory', $cfg['labels']['location_title'] ?? '', 'accent-l
 </div>
 <p class="venue__address" data-anim="item"><?= e($cfg['venue_address']) ?></p>
 <?php $maps = map_app_links($cfg); ?>
-<div class="map-apps" id="mapApps" data-anim="item">
-    <p class="map-apps__label"><?= t('map_open_with') ?></p>
-    <a class="map-apps__btn map-apps__btn--wide" href="<?= e($maps['google']) ?>" target="_blank" rel="noopener">Google Maps</a>
-    <a class="map-apps__btn" href="<?= e($maps['waze']) ?>" target="_blank" rel="noopener">Waze</a>
-    <a class="map-apps__btn" href="<?= e($maps['apple']) ?>" target="_blank" rel="noopener">Apple Maps</a>
-    <a class="map-apps__btn map-apps__btn--wide map-apps__btn--other" id="mapOther" href="<?= e($maps['other']) ?>" hidden><?= t('map_other') ?></a>
+<!-- One button. Android: opens the phone's own list of map apps (geo: link).
+     iPhone / computer: opens the popup below. Without JavaScript: Google Maps. -->
+<div class="map-open" data-anim="item">
+    <a class="btn btn--outline" id="mapOpen" href="<?= e($maps['google']) ?>" data-geo="<?= e($maps['other']) ?>" target="_blank" rel="noopener" aria-haspopup="dialog"><?= t('map_open_app') ?></a>
 </div>
+
+<dialog class="paper-dialog" id="mapDialog" aria-labelledby="mapDialogTitle">
+    <div class="paper-dialog__card">
+        <button class="paper-dialog__close" id="mapClose" type="button" aria-label="<?= t('gb_close') ?>">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+        <svg class="note__heart" aria-hidden="true"><use href="#ornament-heart"/></svg>
+        <h3 class="paper-dialog__title" id="mapDialogTitle"><?= t('map_choose') ?></h3>
+        <ul class="map-choices">
+            <li><a class="map-choices__btn" href="<?= e($maps['google']) ?>" target="_blank" rel="noopener">Google Maps</a></li>
+            <li><a class="map-choices__btn" href="<?= e($maps['waze']) ?>" target="_blank" rel="noopener">Waze</a></li>
+            <li><a class="map-choices__btn" href="<?= e($maps['apple']) ?>" target="_blank" rel="noopener">Apple Maps</a></li>
+        </ul>
+    </div>
+</dialog>
 <?php section_close(); ?>

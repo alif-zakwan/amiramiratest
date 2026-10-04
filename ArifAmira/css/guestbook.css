@@ -130,66 +130,6 @@
   color:var(--maroon);
 }
 
-/* ---- the popup: a paper card like the wishes ------------------------------------------------ */
-.gb-dialog{
-  width:min(92vw, 26rem);
-  max-width:none; max-height:none;
-  margin:auto;
-  padding:0;
-  border:0;
-  background:transparent;
-  color:var(--ink);
-  overflow:visible;
-}
-.gb-dialog::backdrop{
-  background:rgba(36,4,4,.68);
-  animation:gb-fade .3s var(--ease-soft);
-}
-.gb-dialog[open]{ animation:gb-pop .38s var(--ease-out); }
-@keyframes gb-fade{ from{ opacity:0; } to{ opacity:1; } }
-@keyframes gb-pop{
-  from{ opacity:0; transform:translateY(14px) scale(.97); }
-  to{ opacity:1; transform:none; }
-}
-
-.gb-dialog__card{
-  position:relative;
-  max-height:92vh;
-  max-height:92dvh;
-  overflow-y:auto;
-  overscroll-behavior:contain;
-  padding:2rem 1.4rem 1.6rem;
-  text-align:center;
-  background:#fffdf8;
-  border:1px solid rgba(201,164,100,.55);
-  box-shadow:
-    inset 0 0 0 5px #fffdf8,
-    inset 0 0 0 6px rgba(201,164,100,.35),
-    0 20px 44px rgba(20,0,0,.5);
-}
-.gb-dialog__card .note__heart{ margin:0 auto .3rem; }
-.gb-dialog__title{
-  margin:0 0 1.1rem;
-  font-family:var(--font-allura);
-  font-weight:400;
-  font-size:2.1rem;
-  line-height:1.1;
-  color:var(--maroon);
-}
-.gb-dialog__close{
-  position:absolute; top:.45rem; right:.45rem;
-  width:44px; height:44px;
-  display:grid; place-items:center;
-  padding:0;
-  border:0;
-  border-radius:50%;
-  background:transparent;
-  color:var(--maroon);
-  cursor:pointer;
-}
-.gb-dialog__close svg{ width:22px; height:22px; }
-@media (hover:hover){ .gb-dialog__close:hover{ background:rgba(98,9,9,.08); } }
-
 /* ---- form (inside the popup) -------------------------------------------------------------------- */
 .guestbook-form{ display:grid; gap:1rem; text-align:left; }
 .field__count{

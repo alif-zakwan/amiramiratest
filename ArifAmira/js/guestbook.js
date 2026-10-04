@@ -11,6 +11,7 @@
  * Everything the guest typed is inserted as text, never as HTML.
  */
 import { canAnimate } from './animations.js';
+import { wireDialog, openDialog } from './dialog.js';
 
 const gsap = window.gsap;
 
@@ -52,18 +53,12 @@ export function initGuestbook(labels) {
   // =========================================================================
   //  Popup + form
   // =========================================================================
-  $('gbAdd').addEventListener('click', openDialog);
-  $('gbClose').addEventListener('click', () => dialog.close());
-  dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });  // click on the dim backdrop
-  dialog.addEventListener('close', () => document.documentElement.classList.remove('gb-modal-open'));
-
-  function openDialog() {
+  wireDialog(dialog, $('gbClose'));
+  $('gbAdd').addEventListener('click', () => {
     clearInvalid();
     updateCount();
-    document.documentElement.classList.add('gb-modal-open');
-    if (typeof dialog.showModal === 'function') dialog.showModal();
-    else dialog.setAttribute('open', '');
-  }
+    openDialog(dialog);
+  });
 
   messageInput.addEventListener('input', updateCount);
   form.addEventListener('reset', () => setTimeout(updateCount));
