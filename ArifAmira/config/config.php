@@ -58,6 +58,11 @@ $config = [
     // Paste a Google Maps "share/embed" link's src URL here.
     'map_embed_src' => 'https://www.google.com/maps?q=Dewan+Orang+Ramai+Renggam+Johor&output=embed',
     'map_link'      => 'https://www.google.com/maps/search/?api=1&query=Dewan+Orang+Ramai+Renggam+Johor',
+    // Waze, Apple Maps and the Android app picker are built from these two.
+    // 'venue_coords' is optional but more exact than a text search: in Google Maps
+    // right-click the venue, click the numbers shown, paste here as 'lat,lng'.
+    'map_query'     => 'Dewan Orang Ramai Renggam, Renggam, Johor',
+    'venue_coords'  => '',                    // e.g. '1.8512,103.3037'
 
     // ---- Contacts (name => phone) --------------------------------
     // Each contact gets a Call and a WhatsApp button. WhatsApp needs the
@@ -133,6 +138,9 @@ $config = [
         'schedule'         => 'Aturcara Majlis',
         'arrival'          => 'Ketibaan Pengantin',
         'open_map'         => 'Buka di Google Maps',
+        'map_view'         => 'Lihat peta & arah',
+        'map_open_with'    => 'Buka dengan',
+        'map_other'        => 'Pilih aplikasi lain',
         'location_title'   => 'Lokasi Majlis',
         'map_title'        => 'Peta lokasi majlis',
         'contacts_title'   => 'Hubungi',

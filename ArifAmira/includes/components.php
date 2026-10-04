@@ -102,3 +102,26 @@ function whatsapp_url(string $phone, string $countryCode): string
     }
     return 'https://wa.me/' . $digits;
 }
+
+/**
+ * Where each map app should go for the venue. Uses exact coordinates when
+ * config 'venue_coords' is set ("lat,lng"), else a text search.
+ * 'other' is a geo: link: on Android it opens the phone's own list of
+ * map apps (Waze, Maps, HERE…); it does nothing on iPhone, so the page
+ * only shows that button on Android.
+ */
+function map_app_links(array $cfg): array
+{
+    $coords = preg_replace('/\s+/', '', (string) ($cfg['venue_coords'] ?? ''));
+    if (!preg_match('/^-?\d{1,3}(\.\d+)?,-?\d{1,3}(\.\d+)?$/', $coords)) {
+        $coords = '';
+    }
+    $q = rawurlencode((string) ($cfg['map_query'] ?? $cfg['venue_name']));
+
+    return [
+        'google' => $cfg['map_link'] ?? 'https://www.google.com/maps/search/?api=1&query=' . $q,
+        'waze'   => $coords !== '' ? "https://waze.com/ul?ll=$coords&navigate=yes" : "https://waze.com/ul?q=$q&navigate=yes",
+        'apple'  => $coords !== '' ? "https://maps.apple.com/?ll=$coords&q=$q" : "https://maps.apple.com/?q=$q",
+        'other'  => $coords !== '' ? "geo:$coords?q=$coords($q)" : "geo:0,0?q=$q",
+    ];
+}

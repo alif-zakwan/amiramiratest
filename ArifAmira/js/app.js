@@ -12,7 +12,7 @@
  */
 import { initOpening } from './opening.js';
 import { initScrollMode } from './scroll-mode.js';
-import { initCountdown, initRsvp, initMusic, initGift, initShare } from './features.js';
+import { initCountdown, initRsvp, initMusic, initGift, initShare, initMapApps } from './features.js';
 import { initGuestbook } from './guestbook.js';
 
 const settings = JSON.parse(document.getElementById('appSettings').textContent);
@@ -43,3 +43,4 @@ initRsvp(labels);
 initGuestbook(labels);
 initGift(labels);
 initShare(labels);
+initMapApps();

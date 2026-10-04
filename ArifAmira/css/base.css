@@ -29,6 +29,8 @@ body{
 .gb-modal-open body{ overflow:hidden; }
 
 img, svg{ display:block; max-width:100%; }
+@media (prefers-reduced-motion: no-preference){ html{ scroll-behavior:smooth; } }
+
 /* the hidden attribute must win over component display rules (flex/grid) */
 [hidden]{ display:none !important; }
 a{ color:inherit; }

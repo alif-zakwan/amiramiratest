@@ -184,3 +184,12 @@ function flashLabel(button, text) {
   button.textContent = text;
   setTimeout(() => { button.textContent = original; }, 1800);
 }
+
+/* ---------------------------------------------------------------
+   Map apps: the "choose another app" button uses a geo: link, which
+   only Android understands (it opens the phone's list of map apps)
+--------------------------------------------------------------- */
+export function initMapApps() {
+  const other = document.getElementById('mapOther');
+  if (other && /android/i.test(navigator.userAgent)) other.hidden = false;
+}

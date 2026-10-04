@@ -12,7 +12,7 @@ section_open('details', 'maroon', $cfg['labels']['schedule'] ?? '', 'feature');
         <dt class="caps-label"><?= t('venue') ?></dt>
         <dd>
             <span class="details__value"><?= e($cfg['venue_name']) ?></span>
-            <a class="details__link" href="<?= e($cfg['map_link']) ?>" target="_blank" rel="noopener"><?= t('open_map') ?> &rarr;</a>
+            <a class="details__link" href="#venue"><?= t('map_view') ?> &darr;</a>
         </dd>
     </div>
 
