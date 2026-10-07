@@ -64,14 +64,16 @@ $config = [
     'map_query'     => 'Dewan Orang Ramai Renggam, Renggam, Johor',
     'venue_coords'  => '',                    // e.g. '1.8512,103.3037'
 
-    // ---- Contacts (name => phone) --------------------------------
+    // ---- Contacts ---------------------------------------------------
+    // 'role' is what the card shows (the person's name is kept here for your own reference
+    // and for the button labels if 'role' is left empty).
     // Each contact gets a Call and a WhatsApp button. WhatsApp needs the
     // country code, so a number starting with 0 is turned into 60... (Malaysia).
     'whatsapp_country_code' => '60',
     'contacts' => [
-        ['name' => 'Norizam', 'phone' => '011-55059882'],
-        ['name' => 'Liza',    'phone' => '012-7240005'],
-        ['name' => 'Aiman',   'phone' => '013-4614809'],
+        ['name' => 'Norizam', 'role' => 'Bapa Pengantin', 'phone' => '011-55059882'],
+        ['name' => 'Liza',    'role' => 'Ibu Pengantin',  'phone' => '012-7240005'],
+        ['name' => 'Aiman',   'role' => 'Adik Pengantin', 'phone' => '013-4614809'],
     ],
 
     // ---- Optional: money gift / salam kaut section -----------------
