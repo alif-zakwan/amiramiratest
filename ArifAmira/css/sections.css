@@ -204,22 +204,26 @@
   border:1px solid var(--paper-edge);
   background:rgba(255,255,255,.55);
 }
-.contact__info{ margin:0 0 .75rem; }
-.contact__role{
+.contact__info{ margin:0 0 .85rem; }
+.contact__role{                          /* who it is: the main line */
   display:block;
-  font-size:.68rem;
+  font-family:var(--font-caps);
+  font-size:.95rem;
   font-weight:600;
-  letter-spacing:.16em;
+  letter-spacing:.12em;
   text-transform:uppercase;
+  color:var(--maroon);
+}
+.contact__phone{                         /* the number: small, soft, in brackets (the buttons do the work) */
+  display:block;
+  margin-top:.4rem;
+  font-size:.78rem;
+  font-weight:400;
+  letter-spacing:.08em;
   color:var(--ink-soft);
 }
-.contact__phone{
-  display:block;
-  margin-top:.1rem;
-  font-size:1.1rem;
-  font-weight:500;
-  letter-spacing:.1em;
-}
+.contact__phone::before{ content:"("; }
+.contact__phone::after{ content:")"; }
 .contact__actions{ display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:.5rem; }
 .contact__btn{
   min-width:0;
