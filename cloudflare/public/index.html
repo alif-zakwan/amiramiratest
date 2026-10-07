@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ms" class="no-js" data-mode="scroll">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4a0707">
+<title>Amira &amp; Arif | Walimatulurus</title>
+<meta name="description" content="Anda dijemput hadir ke majlis perkahwinan Amira &amp; Arif, Sabtu 28 November 2026.">
+
+<!-- Open Graph so the link looks good when shared on WhatsApp / Telegram -->
+<meta property="og:title" content="Amira &amp; Arif | Walimatulurus">
+<meta property="og:description" content="Anda dijemput hadir ke majlis perkahwinan Amira &amp; Arif, Sabtu 28 November 2026.">
+<meta property="og:type" content="website">
+
+<link rel="icon" href="data:,">
+<script>document.documentElement.classList.replace('no-js', 'js');</script>
+
+<!-- Fonts, matched to the printed card:
+     Pinyon Script (couple's names), Cinzel (engraved capitals),
+     Montserrat (spaced-out body text), Amiri (Arabic greeting) -->
+<link rel="preload" as="image" href="assets/images/emblem-doves.webp">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/sections.css">
+<link rel="stylesheet" href="css/guestbook.css">
+<link rel="stylesheet" href="css/opening.css">
+<link rel="stylesheet" href="css/modes.css">
+</head>
+<body>
+
+<!-- Shared ornaments, defined once and reused via <use href="#…"> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <!-- line · diamonds · central flourish · diamonds · line (card divider) -->
+  <symbol id="ornament-divider" viewBox="0 0 240 16">
+    <g fill="none" stroke="currentColor" stroke-linecap="round">
+      <path d="M10 8h76M154 8h76" stroke-width=".8"/>
+      <path d="M120 8c-2.5-4.5-9-5-10.5-.6-1.2 3.6 3.6 5.4 5.6 2.6" stroke-width="1"/>
+      <path d="M120 8c2.5-4.5 9-5 10.5-.6 1.2 3.6-3.6 5.4-5.6 2.6" stroke-width="1"/>
+      <path d="M120 8c-2.5 4.5-9 5-10.5.6M120 8c2.5 4.5 9 5 10.5.6" stroke-width=".7" opacity=".7"/>
+    </g>
+    <g fill="currentColor">
+      <path d="M3 8l3.2-2.3L9.4 8l-3.2 2.3z"/>
+      <path d="M230.6 8l3.2-2.3L237 8l-3.2 2.3z"/>
+      <path d="M86 8l4-2.8L94 8l-4 2.8z"/>
+      <path d="M95.5 8l2.6-1.9 2.6 1.9-2.6 1.9z"/>
+      <path d="M146 8l4-2.8 4 2.8-4 2.8z"/>
+      <path d="M139.3 8l2.6-1.9 2.6 1.9-2.6 1.9z"/>
+      <circle cx="120" cy="8" r="1.5"/>
+    </g>
+  </symbol>
+
+  <!-- scroll curl that sits in each scooped corner of a card -->
+  <symbol id="ornament-corner" viewBox="0 0 64 64">
+    <g fill="none" stroke="currentColor" stroke-linecap="round">
+      <path d="M8 44C8 24 24 8 44 8" stroke-width="1.2"/>
+      <path d="M44 8c7 0 11 4.5 8.5 8.4-2 3-6.6 2-6-1.4" stroke-width="1.2"/>
+      <path d="M8 44c0 7 4.5 11 8.4 8.5 3-2 2-6.6-1.4-6" stroke-width="1.2"/>
+      <path d="M16 40c0-13 11-24 24-24" stroke-width=".7" opacity=".55"/>
+    </g>
+  </symbol>
+
+  <!-- small outlined heart, the guestbook notes' ornament -->
+  <symbol id="ornament-heart" viewBox="0 0 24 24">
+    <path d="M12 20.5s-8.2-5-8.2-11A4.6 4.6 0 0 1 12 6.8a4.6 4.6 0 0 1 8.2 2.7c0 6-8.2 11-8.2 11z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+  </symbol>
+
+  <!-- four-point sparkle, as on the card's frame -->
+  <symbol id="ornament-star" viewBox="-6 -6 12 12">
+    <path fill="currentColor" d="M0-6 1.1-1.1 6 0 1.1 1.1 0 6-1.1 1.1-6 0-1.1-1.1z"/>
+  </symbol>
+
+  <!-- ornate double oval that frames the emblem during the opening -->
+  <symbol id="ornament-oval" viewBox="0 0 160 200">
+    <g fill="none" stroke="currentColor">
+      <ellipse cx="80" cy="100" rx="70" ry="92" stroke-width="1"/>
+      <ellipse cx="80" cy="100" rx="64" ry="86" stroke-width=".6" stroke-dasharray="1 3.5" opacity=".8"/>
+    </g>
+    <g fill="currentColor" opacity=".9">
+      <path d="M80 8c-9 0-15 5-15 5s6-2 15-2 15 2 15 2-6-5-15-5z"/>
+      <path d="M50 14c6-6 18-9 30-9s24 3 30 9c-8-3-19-5-30-5s-22 2-30 5z"/>
+      <circle cx="80" cy="3.5" r="1.6"/>
+      <path d="M80 192c-9 0-15-5-15-5s6 2 15 2 15-2 15-2-6 5-15 5z"/>
+      <path d="M50 186c6 6 18 9 30 9s24-3 30-9c-8 3-19 5-30 5s-22-2-30-5z"/>
+      <circle cx="80" cy="196.5" r="1.6"/>
+    </g>
+  </symbol>
+</svg>
+
+<div class="paper-backdrop" aria-hidden="true"></div>
+
+<audio id="bgMusic" src="assets/audio/music_file.mp3" data-start="0" preload="none"></audio>
+<button id="musicToggle" class="music-toggle" type="button" aria-label="Main / henti muzik" aria-pressed="false">
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path fill="currentColor" d="M9 18V5l12-2v13"/>
+        <circle cx="6" cy="18" r="3" fill="currentColor"/>
+        <circle cx="18" cy="16" r="3" fill="currentColor"/>
+    </svg>
+</button>
+
+<div class="opening" id="opening">
+    <div class="opening__reveal" data-opening="reveal">
+        <div class="opening__monogram" data-opening="monogram">
+            <svg class="opening__oval" aria-hidden="true"><use href="#ornament-oval"/></svg>
+            <img class="opening__emblem" src="assets/images/emblem-doves.webp" alt="" width="368" height="368">
+        </div>
+    </div>
+
+    <div class="opening__flap opening__flap--left" data-opening="flap-left"><span></span></div>
+    <div class="opening__flap opening__flap--right" data-opening="flap-right"><span></span></div>
+
+    <div class="opening__florals" data-opening="florals" aria-hidden="true">
+        <img class="opening__floral opening__floral--tr" src="assets/images/flower2.webp" alt="" width="390" height="391">
+        <img class="opening__floral opening__floral--bl" src="assets/images/flower1.webp" alt="" width="295" height="662">
+    </div>
+
+    <button class="seal" id="openSeal" type="button" aria-label="Buka jemputan">
+        <span class="seal__half seal__half--left" data-opening="seal-left"></span>
+        <span class="seal__half seal__half--right" data-opening="seal-right"></span>
+        <span class="seal__letters" data-opening="seal-letters">AA</span>
+        <span class="seal__glint" aria-hidden="true"></span>
+    </button>
+
+    <button class="opening__skip" id="openingSkip" type="button" hidden>Langkau &rsaquo;</button>
+</div>
+<main class="experience" id="experience" data-mode="scroll">
+<section class="section section--cover" id="cover" data-section aria-label="Amira Arezan &amp; Anwar Arif"><div class="card card--maroon" data-anim="card"><div class="card__corners" aria-hidden="true"><svg class="card__corner card__corner--tl"><use href="#ornament-corner"/></svg><svg class="card__star card__star--tl"><use href="#ornament-star"/></svg><svg class="card__corner card__corner--tr"><use href="#ornament-corner"/></svg><svg class="card__star card__star--tr"><use href="#ornament-star"/></svg><svg class="card__corner card__corner--bl"><use href="#ornament-corner"/></svg><svg class="card__star card__star--bl"><use href="#ornament-star"/></svg><svg class="card__corner card__corner--br"><use href="#ornament-corner"/></svg><svg class="card__star card__star--br"><use href="#ornament-star"/></svg></div><div class="florals florals--feature" aria-hidden="true"><span class="floral floral--tr-main"><img data-anim="floral" src="assets/images/flower2.webp" alt="" width="390" height="391" decoding="async"></span><span class="floral floral--tr-trail"><img data-anim="floral" src="assets/images/flower1.webp" alt="" width="295" height="662" decoding="async"></span><span class="floral floral--bl-trail"><img data-anim="floral" src="assets/images/flower1.webp" alt="" width="295" height="662" decoding="async"></span><span class="floral floral--bl-main"><img data-anim="floral" src="assets/images/flower3.webp" alt="" width="489" height="204" decoding="async"></span></div><div class="card__body"><p class="cover__arabic" data-anim="item" lang="ar" dir="rtl">اَلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</p>
+<p class="cover__tagline" data-anim="item">Pertemuan Kejora dan Purnama</p>
+
+<img class="cover__emblem" data-anim="item" src="assets/images/emblem-doves.webp" alt="" width="368" height="368">
+
+<h1 class="names">
+    <span class="names__line" data-anim="item" data-emph="focus">Amira Arezan</span>
+    <span class="names__amp" data-anim="item" data-emph="focus">&amp;</span>
+    <span class="names__line" data-anim="item" data-emph="focus">Anwar Arif</span>
+</h1>
+
+<svg class="divider" data-anim="item" aria-hidden="true" focusable="false"><use href="#ornament-divider"/></svg><p class="date-line date-line--cover" data-anim="item" data-emph="high"><span>Sabtu</span><span class="date-line__bar" aria-hidden="true"></span><span>28 November 2026</span></p><svg class="divider" data-anim="item" aria-hidden="true" focusable="false"><use href="#ornament-divider"/></svg>
+<blockquote class="cover__quote" data-anim="item">
+    <p>“Dan Kami telah menciptakan kamu berpasang-pasangan”</p>
+    <cite>Surah An-Naba&#039; : 78:8</cite>
+</blockquote>
+</div></div></section><section class="section section--countdown" id="countdown" data-section aria-label="Menghitung Hari"><div class="card card--ivory" data-anim="card"><div class="florals florals--accent-right" aria-hidden="true"><span class="floral floral--accent-tr"><img data-anim="floral" src="assets/images/flower2.webp" alt="" width="390" height="391" decoding="async"></span></div><div class="card__body"><h2 class="section-title" data-anim="item">Menghitung Hari</h2>
+<svg class="divider divider--ink" data-anim="item" aria-hidden="true" focusable="false"><use href="#ornament-divider"/></svg>
+<div class="countdown" id="countdownClock" data-target="2026-11-28T11:00:00+08:00" data-anim="item" data-emph="high" role="timer">
+        <div class="countdown__unit">
+        <span class="countdown__num" data-unit="days">00</span>
+        <span class="countdown__label">Hari</span>
+    </div>
+        <div class="countdown__unit">
+        <span class="countdown__num" data-unit="hours">00</span>
+        <span class="countdown__label">Jam</span>
+    </div>
+        <div class="countdown__unit">
+        <span class="countdown__num" data-unit="mins">00</span>
+        <span class="countdown__label">Minit</span>
+    </div>
+        <div class="countdown__unit">
+        <span class="countdown__num" data-unit="secs">00</span>
+        <span class="countdown__label">Saat</span>
+    </div>
+    </div>
+<p class="countdown__done" id="countdownDone" data-anim="item" hidden>Tibanya hari yang dinanti-nantikan!</p>
+
+<p class="date-line date-line--ink" data-anim="item"><span>Sabtu</span><span class="date-line__bar" aria-hidden="true"></span><span>28 November 2026</span></p></div></div></section><section class="section section--invitation" id="invitation" data-section aria-label="Nurin Amira Arezan &amp; Anwar Arif"><div class="card card--maroon" data-anim="card"><div class="card__corners" aria-hidden="true"><svg class="card__corner card__corner--tl"><use href="#ornament-corner"/></svg><svg class="card__star card__star--tl"><use href="#ornament-star"/></svg><svg class="card__corner card__corner--tr"><use href="#ornament-corner"/></svg><svg class="card__star card__star--tr"><use href="#ornament-star"/></svg><svg class="card__corner card__corner--bl"><use href="#ornament-corner"/></svg><svg class="card__star card__star--bl"><use href="#ornament-star"/></svg><svg class="card__corner card__corner--br"><use href="#ornament-corner"/></svg><svg class="card__star card__star--br"><use href="#ornament-star"/></svg></div><div class="florals florals--feature-alt" aria-hidden="true"><span class="floral floral--tl-main"><img data-anim="floral" src="assets/images/flower2.webp" alt="" width="390" height="391" decoding="async"></span><span class="floral floral--tl-trail"><img data-anim="floral" src="assets/images/flower1.webp" alt="" width="295" height="662" decoding="async"></span><span class="floral floral--br-trail"><img data-anim="floral" src="assets/images/flower1.webp" alt="" width="295" height="662" decoding="async"></span><span class="floral floral--br-main"><img data-anim="floral" src="assets/images/flower3.webp" alt="" width="489" height="204" decoding="async"></span></div><div class="card__body"><div class="watermark" aria-hidden="true">
+    <img src="assets/images/emblem-doves.webp" alt="" width="368" height="368">
+</div>
+
+<p class="caps-text" data-anim="item">Dengan penuh rasa kesyukuran ke hadrat Ilahi, kami</p>
+
+<p class="formal__parents" data-anim="item">
+    <span>Norizam bin Nisak</span>
+    <span class="formal__amp">&amp;</span>
+    <span>Norhaliza binti Ibrahim</span>
+</p>
+
+<p class="caps-text" data-anim="item">Dengan segala hormatnya mempersilakan Dato&#039;/Datin/Tuan/Puan/Encik/Cik untuk hadir ke majlis perkahwinan puteri kami</p>
+
+<svg class="divider" data-anim="item" aria-hidden="true" focusable="false"><use href="#ornament-divider"/></svg>
+<p class="formal__name formal__name--script" data-anim="item" data-emph="focus">Nurin Amira Arezan</p>
+<p class="caps-text caps-text--relation" data-anim="item">dengan pilihan hatinya</p>
+<p class="formal__name formal__name--script" data-anim="item" data-emph="focus">Anwar Arif</p>
+
+<svg class="divider" data-anim="item" aria-hidden="true" focusable="false"><use href="#ornament-divider"/></svg>
+<img class="drift-blossom" data-anim="drift" src="assets/images/blossom.png" alt="" aria-hidden="true" width="93" height="115">
+</div></div></section><section class="section section--details" id="details" data-section aria-label="Aturcara Majlis"><div class="card card--maroon" data-anim="card"><div class="card__corners" aria-hidden="true"><svg class="card__corner card__corner--tl"><use href="#ornament-corner"/></svg><svg class="card__star card__star--tl"><use href="#ornament-star"/></svg><svg class="card__corner card__corner--tr"><use href="#ornament-corner"/></svg><svg class="card__star card__star--tr"><use href="#ornament-star"/></svg><svg class="card__corner card__corner--bl"><use href="#ornament-corner"/></svg><svg class="card__star card__star--bl"><use href="#ornament-star"/></svg><svg class="card__corner card__corner--br"><use href="#ornament-corner"/></svg><svg class="card__star card__star--br"><use href="#ornament-star"/></svg></div><div class="florals florals--feature" aria-hidden="true"><span class="floral floral--tr-main"><img data-anim="floral" src="assets/images/flower2.webp" alt="" width="390" height="391" decoding="async"></span><span class="floral floral--tr-trail"><img data-anim="floral" src="assets/images/flower1.webp" alt="" width="295" height="662" decoding="async"></span><span class="floral floral--bl-trail"><img data-anim="floral" src="assets/images/flower1.webp" alt="" width="295" height="662" decoding="async"></span><span class="floral floral--bl-main"><img data-anim="floral" src="assets/images/flower3.webp" alt="" width="489" height="204" decoding="async"></span></div><div class="card__body"><dl class="details">
+    <div class="details__item" data-anim="item" data-emph="high">
+        <dt class="caps-label">Pada</dt>
+        <dd><p class="date-line date-line--details" data-anim="item" data-emph="high"><span>Sabtu</span><span class="date-line__bar" aria-hidden="true"></span><span>28 November 2026</span></p></dd>
+    </div>
+
+    <div class="details__item" data-anim="item" data-emph="high">
+        <dt class="caps-label">Bertempat di</dt>
+        <dd>
+            <span class="details__value">Dewan Orang Ramai Renggam</span>
+            <a class="details__link" href="#venue">Lihat peta &amp; arah &darr;</a>
+        </dd>
+    </div>
+
+    <div class="details__item" data-anim="item" data-emph="high">
+        <dt class="caps-label">Aturcara Majlis</dt>
+        <dd class="details__value">11.00 pagi &ndash; 4.30 petang</dd>
+    </div>
+
+    <div class="details__item" data-anim="item" data-emph="high">
+        <dt class="caps-label">Ketibaan Pengantin</dt>
+        <dd class="details__value details__value--sm">12.30 tengahari</dd>
+    </div>
+</dl>
+</div></div></section><section class="section section--venue" id="venue" data-section aria-label="Lokasi Majlis"><div class="card card--ivory" data-anim="card"><div class="florals florals--accent-left" aria-hidden="true"><span class="floral floral--accent-tl"><img data-anim="floral" src="assets/images/flower3.webp" alt="" width="489" height="204" decoding="async"></span></div><div class="card__body"><h2 class="section-title" data-anim="item">Lokasi Majlis</h2>
+<svg class="divider divider--ink" data-anim="item" aria-hidden="true" focusable="false"><use href="#ornament-divider"/></svg>
+<div class="map-frame" data-anim="item">
+    <iframe src="https://www.google.com/maps?q=Dewan+Orang+Ramai+Renggam+Johor&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Peta lokasi majlis"></iframe>
+</div>
+<p class="venue__address" data-anim="item">Dewan Orang Ramai Renggam, 86000 Renggam, Johor</p>
+<!-- One button. Android: opens the phone's own list of map apps (geo: link).
+     iPhone / computer: opens the popup below. Without JavaScript: Google Maps. -->
+<div class="map-open" data-anim="item">
+    <a class="btn btn--outline" id="mapOpen" href="https://www.google.com/maps/search/?api=1&amp;query=Dewan+Orang+Ramai+Renggam+Johor" data-geo="geo:0,0?q=Dewan%20Orang%20Ramai%20Renggam%2C%20Renggam%2C%20Johor" target="_blank" rel="noopener" aria-haspopup="dialog">Buka di aplikasi peta</a>
+</div>
+
+<dialog class="paper-dialog" id="mapDialog" aria-labelledby="mapDialogTitle">
+    <div class="paper-dialog__card">
+        <button class="paper-dialog__close" id="mapClose" type="button" aria-label="Tutup">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+        <svg class="note__heart" aria-hidden="true"><use href="#ornament-heart"/></svg>
+        <h3 class="paper-dialog__title" id="mapDialogTitle">Pilih aplikasi peta</h3>
+        <ul class="map-choices">
+            <li><a class="map-choices__btn" href="https://www.google.com/maps/search/?api=1&amp;query=Dewan+Orang+Ramai+Renggam+Johor" target="_blank" rel="noopener">Google Maps</a></li>
+            <li><a class="map-choices__btn" href="https://waze.com/ul?q=Dewan%20Orang%20Ramai%20Renggam%2C%20Renggam%2C%20Johor&amp;navigate=yes" target="_blank" rel="noopener">Waze</a></li>
+            <li><a class="map-choices__btn" href="https://maps.apple.com/?q=Dewan%20Orang%20Ramai%20Renggam%2C%20Renggam%2C%20Johor" target="_blank" rel="noopener">Apple Maps</a></li>
+        </ul>
+    </div>
+</dialog>
+</div></div></section><section class="section section--contacts" id="contacts" data-section aria-label="Hubungi"><div class="card card--ivory" data-anim="card"><div class="florals florals--accent-right" aria-hidden="true"><span class="floral floral--accent-tr"><img data-anim="floral" src="assets/images/flower2.webp" alt="" width="390" height="391" decoding="async"></span></div><div class="card__body"><h2 class="section-title" data-anim="item">Hubungi</h2>
+<svg class="divider divider--ink" data-anim="item" aria-hidden="true" focusable="false"><use href="#ornament-divider"/></svg>
+<ul class="contact-list">
+        <li class="contact" data-anim="item">
+        <p class="contact__info">
+            <span class="contact__role">Bapa Pengantin</span>
+            <span class="contact__phone">011-55059882</span>
+        </p>
+        <div class="contact__actions">
+            <a class="contact__btn contact__btn--call" href="tel:01155059882" aria-label="Panggil Bapa Pengantin">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z"/></svg>
+                Panggil            </a>
+            <a class="contact__btn contact__btn--whatsapp" href="https://wa.me/601155059882" target="_blank" rel="noopener" aria-label="WhatsApp Bapa Pengantin">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                WhatsApp            </a>
+        </div>
+    </li>
+        <li class="contact" data-anim="item">
+        <p class="contact__info">
+            <span class="contact__role">Ibu Pengantin</span>
+            <span class="contact__phone">012-7240005</span>
+        </p>
+        <div class="contact__actions">
+            <a class="contact__btn contact__btn--call" href="tel:0127240005" aria-label="Panggil Ibu Pengantin">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z"/></svg>
+                Panggil            </a>
+            <a class="contact__btn contact__btn--whatsapp" href="https://wa.me/60127240005" target="_blank" rel="noopener" aria-label="WhatsApp Ibu Pengantin">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                WhatsApp            </a>
+        </div>
+    </li>
+        <li class="contact" data-anim="item">
+        <p class="contact__info">
+            <span class="contact__role">Adik Pengantin</span>
+            <span class="contact__phone">013-4614809</span>
+        </p>
+        <div class="contact__actions">
+            <a class="contact__btn contact__btn--call" href="tel:0134614809" aria-label="Panggil Adik Pengantin">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z"/></svg>
+                Panggil            </a>
+            <a class="contact__btn contact__btn--whatsapp" href="https://wa.me/60134614809" target="_blank" rel="noopener" aria-label="WhatsApp Adik Pengantin">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                WhatsApp            </a>
+        </div>
+    </li>
+    </ul>
+</div></div></section><section class="section section--rsvp" id="rsvp" data-section aria-label="RSVP"><div class="card card--ivory" data-anim="card"><div class="florals florals--accent-left" aria-hidden="true"><span class="floral floral--accent-tl"><img data-anim="floral" src="assets/images/flower3.webp" alt="" width="489" height="204" decoding="async"></span></div><div class="card__body"><h2 class="section-title" data-anim="item">RSVP</h2>
+<svg class="divider divider--ink" data-anim="item" aria-hidden="true" focusable="false"><use href="#ornament-divider"/></svg><p class="section-note" data-anim="item">Sila sahkan kehadiran anda sebelum <strong>14 November 2026</strong>.</p>
+
+<form class="rsvp-form" id="rsvpForm" data-anim="item" novalidate>
+    <label class="field">
+        <span class="field__label">Nama</span>
+        <input type="text" id="rsvpName" name="name" maxlength="80" autocomplete="name" required>
+    </label>
+    <label class="field">
+        <span class="field__label">Kehadiran</span>
+        <select id="rsvpAttending" name="attending" required>
+            <option value="" disabled selected>Pilih satu</option>
+            <option value="hadir">Akan hadir</option>
+            <option value="tidak_hadir">Tidak dapat hadir</option>
+        </select>
+    </label>
+    <label class="field" id="rsvpPaxField" hidden>
+        <span class="field__label">Bilangan tetamu</span>
+        <select id="rsvpPax" name="pax" disabled>
+                        <option value="1" selected>1 orang</option>
+                        <option value="2">2 orang</option>
+                        <option value="3">3 orang</option>
+                        <option value="4">4 orang</option>
+                        <option value="5">5 orang</option>
+                        <option value="6">6 orang</option>
+                    </select>
+    </label>
+    <label class="field field--trap" aria-hidden="true">
+        Website <input type="text" name="website" tabindex="-1" autocomplete="off">
+    </label>
+    <p class="form-status" id="rsvpStatus" role="status" aria-live="polite"></p>
+    <button type="submit" class="btn btn--solid" id="rsvpSubmit">Hantar</button>
+</form>
+</div></div></section><section class="section section--wishes" id="wishes" data-section aria-label="Ucapan Tetamu"><div class="card card--ivory" data-anim="card"><div class="florals florals--accent-right" aria-hidden="true"><span class="floral floral--accent-tr"><img data-anim="floral" src="assets/images/flower2.webp" alt="" width="390" height="391" decoding="async"></span></div><div class="card__body"><h2 class="section-title" data-anim="item">Ucapan Tetamu</h2>
+<svg class="divider divider--ink" data-anim="item" aria-hidden="true" focusable="false"><use href="#ornament-divider"/></svg><p class="section-note guestbook__intro" data-anim="item">Titipkan doa, ucapan dan pesanan buat kedua mempelai.</p>
+
+<div class="guestbook" data-anim="item">
+    <div class="guestbook__empty" id="gbEmpty">
+        <svg class="guestbook__heart" aria-hidden="true"><use href="#ornament-heart"/></svg>
+        <p>Jadilah yang pertama meninggalkan ucapan 🤍</p>
+    </div>
+
+    <div class="stage" id="gbStage" hidden>
+        <button class="stage__arrow stage__arrow--prev" id="gbPrev" type="button" aria-label="Ucapan sebelum">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <div class="stack" id="gbStack" data-no-swipe tabindex="0" role="group" aria-roledescription="carousel" aria-label="Ucapan daripada tetamu">
+            <ul class="stack__cards" id="gbCards"></ul>
+        </div>
+        <button class="stage__arrow stage__arrow--next" id="gbNext" type="button" aria-label="Ucapan seterusnya">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M9 5l7 7-7 7"/></svg>
+        </button>
+    </div>
+    <p class="guestbook__count" id="gbCounter" aria-live="polite" hidden></p>
+</div>
+
+<div class="guestbook__add" data-anim="item">
+    <button class="btn btn--outline" id="gbAdd" type="button" aria-haspopup="dialog">+ Tambah Ucapan</button>
+    <p class="form-status" id="gbThanks" role="status" aria-live="polite"></p>
+</div>
+
+<!-- Popup: write a wish -->
+<dialog class="paper-dialog" id="gbDialog" aria-labelledby="gbDialogTitle">
+    <div class="paper-dialog__card">
+        <button class="paper-dialog__close" id="gbClose" type="button" aria-label="Tutup">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+        <svg class="note__heart" aria-hidden="true"><use href="#ornament-heart"/></svg>
+        <h3 class="paper-dialog__title" id="gbDialogTitle">Tulis Ucapan</h3>
+
+        <form class="guestbook-form" id="guestbookForm" novalidate>
+            <label class="field">
+                <span class="field__label">Nama</span>
+                <input type="text" id="gbName" name="name" maxlength="60" autocomplete="name" placeholder="Nama anda" required>
+            </label>
+            <label class="field">
+                <span class="field__label">Ucapan</span>
+                <textarea id="gbMessage" name="message" rows="5" maxlength="280" placeholder="Tuliskan ucapan, doa atau pesanan anda..." required></textarea>
+                <span class="field__count" id="gbCount" aria-hidden="true">0 / 280</span>
+            </label>
+            <label class="field field--trap" aria-hidden="true">
+                Website <input type="text" name="website" tabindex="-1" autocomplete="off">
+            </label>
+            <p class="form-status" id="gbStatus" role="status" aria-live="polite"></p>
+            <button type="submit" class="btn btn--solid" id="gbSubmit">Hantar Ucapan</button>
+        </form>
+    </div>
+</dialog>
+</div></div></section><section class="section section--closing" id="closing" data-section aria-label="Amira Arezan &amp; Anwar Arif"><div class="card card--plain" data-anim="card"><div class="card__body"><div class="medallion" data-anim="item" aria-hidden="true">
+    <img src="assets/images/emblem-doves.webp" alt="" width="368" height="368">
+</div>
+<p class="closing__thanks" data-anim="item">Terima kasih kerana menjadi sebahagian daripada kegembiraan kami.</p>
+<p class="closing__names" data-anim="item"><span>Amira Arezan</span> <span><i>&amp;</i> Anwar Arif</span></p>
+<svg class="divider divider--ink" data-anim="item" aria-hidden="true" focusable="false"><use href="#ornament-divider"/></svg><button class="btn btn--outline" id="shareBtn" type="button" data-anim="item">Kongsi Jemputan Ini</button>
+</div></div></section></main>
+
+<script type="application/json" id="appSettings">{"mode":"scroll","labels":{"rsvp_submit":"Hantar","rsvp_sending":"Menghantar…","rsvp_ok":"Terima kasih! RSVP anda telah diterima.","rsvp_required":"Sila lengkapkan nama dan kehadiran.","rsvp_failed":"Maaf, sesuatu tidak kena. Cuba lagi.","rsvp_offline":"Tidak dapat menghubungi pelayan. Cuba lagi sebentar.","gb_submit":"Hantar Ucapan","gb_sending":"Menghantar…","gb_ok":"Terima kasih atas ucapan anda 🤍","gb_name_required":"Sila isi nama anda.","gb_message_required":"Sila tulis ucapan anda.","gb_failed":"Maaf, ucapan tidak dapat dihantar. Cuba lagi.","gb_offline":"Tidak dapat menghubungi pelayan. Cuba lagi sebentar.","gb_prev":"Ucapan sebelum","gb_next":"Ucapan seterusnya","gift_copied":"Disalin!","share_copied":"Pautan disalin!"}}</script>
+<script src="js/vendor/gsap.min.js" defer></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

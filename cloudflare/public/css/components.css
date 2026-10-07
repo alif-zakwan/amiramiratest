@@ -1,0 +1,359 @@
+/* =====================================================================
+   Components: card frame, ornaments, florals, buttons, form fields,
+   fixed controls. Shared by both experience modes.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   CARD — the card's bracket-shaped panel: scooped (concave) corners,
+   a fine keyline, and texture. Built from two masked layers so it
+   stays crisp at any size:
+     ::before  keyline colour, scooped at radius --scoop
+     ::after   panel fill, inset by --outline, scooped concentrically
+   Florals and ornaments sit above, content above those.
+   --------------------------------------------------------------------- */
+.card{
+  position:relative;
+  width:100%;
+  max-width:var(--card-max);
+  margin-inline:auto;
+  isolation:isolate;
+  filter:drop-shadow(0 14px 22px rgba(60,10,8,.22)) drop-shadow(0 2px 4px rgba(60,10,8,.18));
+}
+.card::before,
+.card::after{
+  content:"";
+  position:absolute;
+  inset:var(--i);
+  z-index:-2;
+  --r:calc(var(--scoop) + var(--i));
+  --m-in:calc(var(--i) * -1);
+  --m-out:calc(100% + var(--i));
+  -webkit-mask:
+    radial-gradient(circle at var(--m-in) var(--m-in), #0000 var(--r), #000 calc(var(--r) + .6px)) top left / 51% 51% no-repeat,
+    radial-gradient(circle at var(--m-out) var(--m-in), #0000 var(--r), #000 calc(var(--r) + .6px)) top right / 51% 51% no-repeat,
+    radial-gradient(circle at var(--m-in) var(--m-out), #0000 var(--r), #000 calc(var(--r) + .6px)) bottom left / 51% 51% no-repeat,
+    radial-gradient(circle at var(--m-out) var(--m-out), #0000 var(--r), #000 calc(var(--r) + .6px)) bottom right / 51% 51% no-repeat;
+          mask:
+    radial-gradient(circle at var(--m-in) var(--m-in), #0000 var(--r), #000 calc(var(--r) + .6px)) top left / 51% 51% no-repeat,
+    radial-gradient(circle at var(--m-out) var(--m-in), #0000 var(--r), #000 calc(var(--r) + .6px)) top right / 51% 51% no-repeat,
+    radial-gradient(circle at var(--m-in) var(--m-out), #0000 var(--r), #000 calc(var(--r) + .6px)) bottom left / 51% 51% no-repeat,
+    radial-gradient(circle at var(--m-out) var(--m-out), #0000 var(--r), #000 calc(var(--r) + .6px)) bottom right / 51% 51% no-repeat;
+}
+.card::before{ --i:0px; }
+.card::after{ --i:var(--outline); }
+
+.card__body{
+  position:relative;
+  z-index:2;
+  padding:var(--card-pad-y) var(--card-pad-x);
+  text-align:center;
+}
+
+/* maroon: the client's card */
+.card--maroon{ color:var(--ivory); }
+.card--maroon .card__body{ padding-block:calc(var(--card-pad-y) + 1.7rem) calc(var(--card-pad-y) + 1rem); }
+.card--maroon::before{ background:rgba(255,250,243,.92); }
+.card--maroon::after{
+  background:
+    var(--tex-grain) 0 0 / 128px 128px,
+    radial-gradient(ellipse 90% 60% at 50% 38%, var(--maroon-lift), transparent 75%),
+    linear-gradient(180deg, var(--maroon) 0%, var(--maroon-deep) 100%);
+}
+
+/* ivory: insert cards (countdown, map, RSVP…) with maroon ink */
+.card--ivory{ color:var(--ink); --outline:1px; }
+.card--ivory::before{ background:var(--ink); opacity:.55; }
+.card--ivory::after{
+  background:
+    var(--tex-paper) 0 0 / 256px 256px,
+    var(--paper-card);
+  background-blend-mode:multiply;
+}
+
+/* plain: content straight on the paper (closing) */
+.card--plain{ filter:none; color:var(--ink); }
+.card--plain::before, .card--plain::after{ content:none; }
+
+/* corner curls + sparkles, following the scoops */
+.card__corners{ position:absolute; inset:0; z-index:1; pointer-events:none; }
+.card__corner{
+  position:absolute;
+  width:calc((var(--scoop) + 9px) * 1.43);
+  height:calc((var(--scoop) + 9px) * 1.43);
+  color:var(--blush);
+  opacity:.7;
+}
+.card__corner--tl{ top:0; left:0; }
+.card__corner--tr{ top:0; right:0; transform:scaleX(-1); }
+.card__corner--bl{ bottom:0; left:0; transform:scaleY(-1); }
+.card__corner--br{ bottom:0; right:0; transform:scale(-1); }
+
+.card__star{
+  position:absolute;
+  width:11px; height:11px;
+  margin:-5.5px;
+  color:var(--ivory);
+}
+.card__star--tl{ top:var(--scoop); left:0; }
+.card__star--tr{ top:0; right:var(--scoop); }
+.card__star--bl{ bottom:0; left:var(--scoop); }
+.card__star--br{ bottom:var(--scoop); right:0; }
+
+/* ---------------------------------------------------------------------
+   FLORALS — the client's sprays, placed like the card: overflowing the
+   frame at opposite corners. Placement lives on the wrapper, motion on
+   the <img> (GSAP), parallax on the set (--parallax, set by JS).
+   --------------------------------------------------------------------- */
+.florals{
+  position:absolute; inset:0;
+  z-index:3;
+  pointer-events:none;
+  transform:translate3d(0, calc(var(--parallax, 0) * 1px), 0);
+}
+.floral{
+  position:absolute;
+  filter:drop-shadow(0 4px 6px rgba(40,5,5,.28));
+}
+.floral img{ width:100%; height:auto; }
+
+.floral--tr-main  { width:41%; top:0; right:0; transform:translate(34%, -42%) rotate(4deg); }
+.floral--tr-trail { width:14%; top:0; right:0; transform:translate(62%, 40%) rotate(-8deg); }
+.floral--bl-trail { width:14%; bottom:0; left:0; transform:translate(-62%, -36%) rotate(172deg); }
+.floral--bl-main  { width:46%; bottom:0; left:0; transform:translate(-24%, 48%) rotate(-6deg); }
+
+.floral--tl-main  { width:41%; top:0; left:0; transform:translate(-34%, -42%) scaleX(-1) rotate(4deg); }
+.floral--tl-trail { width:14%; top:0; left:0; transform:translate(-62%, 40%) scaleX(-1) rotate(-8deg); }
+.floral--br-trail { width:14%; bottom:0; right:0; transform:translate(62%, -36%) scaleX(-1) rotate(172deg); }
+.floral--br-main  { width:46%; bottom:0; right:0; transform:translate(24%, 48%) scaleX(-1) rotate(-6deg); }
+
+.floral--accent-tl{ width:42%; top:0; left:0; transform:translate(-22%, -46%) rotate(-12deg); }
+.floral--accent-tr{ width:36%; top:0; right:0; transform:translate(26%, -40%) rotate(6deg); }
+
+/* ---------------------------------------------------------------------
+   ORNAMENTS
+   --------------------------------------------------------------------- */
+.divider{
+  width:min(15rem, 82%);
+  height:1rem;
+  margin:1.15rem auto;
+  color:var(--ivory);
+  opacity:.95;
+}
+.divider--ink{ color:var(--gold); margin:.8rem auto 1.4rem; width:min(11rem, 70%); }
+
+/* SABTU | 28 NOVEMBER 2026 */
+.date-line{
+  display:flex; align-items:center; justify-content:center;
+  gap:.7em;
+  margin:0;
+  font-family:var(--font-caps);
+  font-size:clamp(.92rem, 4.4vw, 1.35rem);
+  letter-spacing:.02em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.date-line__bar{ flex:none; width:1px; height:1.15em; background:currentColor; opacity:.7; }
+.date-line--details{ font-weight:700; font-size:clamp(.88rem, 4.2vw, 1.2rem); }
+.date-line--ink{ color:var(--ink); font-size:clamp(.9rem, 4.2vw, 1.05rem); margin-top:1.4rem; }
+
+/* emblem on a small wax medallion — for use on the light paper */
+.medallion{
+  width:5.5rem; height:5.5rem;
+  margin:0 auto 1.2rem;
+  border-radius:50%;
+  display:grid; place-items:center;
+  background:
+    var(--tex-grain) 0 0 / 128px 128px,
+    radial-gradient(circle at 35% 30%, var(--maroon-lift), var(--maroon) 60%, var(--maroon-deep));
+  box-shadow:0 0 0 1px rgba(255,250,243,.9), 0 0 0 4px var(--maroon), 0 10px 20px rgba(60,10,8,.28);
+}
+.medallion img{ width:72%; height:auto; }
+
+/* ---------------------------------------------------------------------
+   BUTTONS
+   --------------------------------------------------------------------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height:2.9rem;
+  padding:.7rem 1.6rem;
+  border:1px solid var(--ink);
+  border-radius:2px;
+  font-family:var(--font-caps);
+  font-weight:600;
+  font-size:.8rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  text-decoration:none;
+  cursor:pointer;
+  transition:background-color .25s var(--ease-soft), color .25s var(--ease-soft), transform .15s var(--ease-soft);
+}
+.btn:active{ transform:scale(.97); }
+.btn--solid{ background:var(--maroon); border-color:var(--maroon); color:var(--ivory); width:100%; }
+.btn--solid:disabled{ opacity:.65; cursor:progress; }
+.btn--outline{ background:transparent; color:var(--ink); }
+.btn--light{ background:transparent; border-color:rgba(255,250,243,.8); color:var(--ivory); }
+@media (hover:hover){
+  .btn--solid:hover:not(:disabled){ background:var(--maroon-deep); }
+  .btn--outline:hover{ background:var(--ink); color:var(--ivory); }
+  .btn--light:hover{ background:var(--ivory); color:var(--maroon); }
+}
+
+/* ---------------------------------------------------------------------
+   FORM FIELDS
+   --------------------------------------------------------------------- */
+.field{ display:grid; gap:.35rem; text-align:left; }
+.field__label{
+  font-size:.68rem;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.field__label em{ font-style:normal; font-weight:400; text-transform:none; letter-spacing:0; }
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  font-size:16px;              /* ≥16px stops iOS zooming into the field */
+  padding:.7rem .8rem;
+  border:1px solid var(--paper-edge);
+  border-radius:2px;
+  background:#fff;
+  color:var(--ink);
+  resize:vertical;
+}
+.field select{
+  appearance:none;
+  background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%237d5a52' stroke-width='1.5'/%3E%3C/svg%3E") right .9rem center / 12px 8px no-repeat;
+  padding-right:2.4rem;
+}
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible{ outline:2px solid var(--gold); outline-offset:1px; border-color:var(--gold); }
+.field--trap{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+
+/* ---------------------------------------------------------------------
+   FIXED CONTROLS — appear once the envelope is open
+   --------------------------------------------------------------------- */
+.music-toggle,
+.mode-switch{
+  position:fixed;
+  top:max(12px, env(safe-area-inset-top));
+  z-index:40;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .6s var(--ease-soft), visibility .6s;
+}
+.is-opened .music-toggle,
+.is-opened .mode-switch{ opacity:1; visibility:visible; }
+
+.music-toggle{
+  right:max(12px, env(safe-area-inset-right));
+  width:44px; height:44px;
+  display:grid; place-items:center;
+  border-radius:50%;
+  border:1px solid rgba(255,250,243,.6);
+  background:var(--maroon);
+  color:var(--ivory);
+  box-shadow:0 6px 16px rgba(60,10,8,.3);
+  cursor:pointer;
+}
+.music-toggle[aria-pressed="true"] svg{ animation:note-pulse 1.6s ease-in-out infinite; }
+@keyframes note-pulse{ 50%{ transform:translateY(-2px); } }
+
+.mode-switch{
+  left:max(12px, env(safe-area-inset-left));
+  display:flex;
+  padding:3px;
+  border-radius:999px;
+  background:rgba(71,6,6,.88);
+  box-shadow:0 6px 16px rgba(60,10,8,.25);
+}
+.mode-switch a{
+  padding:.45rem .85rem;
+  border-radius:999px;
+  font-size:.62rem;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  text-decoration:none;
+  color:rgba(255,250,243,.75);
+}
+.mode-switch a[aria-current="page"]{ background:var(--ivory); color:var(--maroon); }
+
+/* ---- POPUP: a paper card on a dimmed page (guestbook form, map apps) ------------------------------------------------ */
+.paper-dialog{
+  width:min(92vw, 26rem);
+  max-width:none; max-height:none;
+  margin:auto;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:var(--ink);
+  overflow:visible;
+}
+.paper-dialog::backdrop{
+  background:rgba(36,4,4,.68);
+  animation:paper-fade .3s var(--ease-soft);
+}
+.paper-dialog[open]{ animation:paper-pop .38s var(--ease-out); }
+@keyframes paper-fade{ from{ opacity:0; } to{ opacity:1; } }
+@keyframes paper-pop{
+  from{ opacity:0; transform:translateY(14px) scale(.97); }
+  to{ opacity:1; transform:none; }
+}
+
+.paper-dialog__card{
+  position:relative;
+  max-height:92vh;
+  max-height:92dvh;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding:2rem 1.4rem 1.6rem;
+  text-align:center;
+  background:#fffdf8;
+  border:1px solid rgba(201,164,100,.55);
+  box-shadow:
+    inset 0 0 0 5px #fffdf8,
+    inset 0 0 0 6px rgba(201,164,100,.35),
+    0 20px 44px rgba(20,0,0,.5);
+}
+.paper-dialog__card .note__heart{ margin:0 auto .3rem; }
+.paper-dialog__title{
+  margin:0 0 1.1rem;
+  font-family:var(--font-allura);
+  font-weight:400;
+  font-size:2.1rem;
+  line-height:1.1;
+  color:var(--maroon);
+}
+.paper-dialog__close{
+  position:absolute; top:.45rem; right:.45rem;
+  width:44px; height:44px;
+  display:grid; place-items:center;
+  padding:0;
+  border:0;
+  border-radius:50%;
+  background:transparent;
+  color:var(--maroon);
+  cursor:pointer;
+}
+.paper-dialog__close svg{ width:22px; height:22px; }
+@media (hover:hover){ .paper-dialog__close:hover{ background:rgba(98,9,9,.08); } }
+
+/* ---------------------------------------------------------------------
+   PETALS — a blossom now and then drifts down past the page
+   (js/petals.js). Above the cards, below the buttons and popups, and
+   never in the way of a tap.
+   --------------------------------------------------------------------- */
+.petal-layer{
+  position:fixed; inset:0;
+  z-index:30;
+  pointer-events:none;
+  overflow:hidden;
+}
+.petal{
+  position:absolute; top:0; left:0;
+  will-change:transform, opacity;
+}
+.petal img{ display:block; width:100%; height:auto; }

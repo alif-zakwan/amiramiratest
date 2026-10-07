@@ -1,0 +1,90 @@
+/* =====================================================================
+   Experience modes. Same markup, two layouts:
+     scroll — sections stacked, revealed as they scroll into view
+     page   — one section at a time, turned like cards (js/page-mode.js)
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   SCROLL MODE
+   --------------------------------------------------------------------- */
+[data-mode="scroll"] .experience{
+  overflow-x:clip;
+  padding:calc(env(safe-area-inset-top) + 3rem) var(--gutter) calc(env(safe-area-inset-bottom) + 2rem);
+}
+[data-mode="scroll"] .section{ padding:clamp(3.4rem, 15vw, 5rem) 0; }
+[data-mode="scroll"] .section--closing{ padding-bottom:3rem; }
+
+/* ---------------------------------------------------------------------
+   PAGE MODE
+   --------------------------------------------------------------------- */
+html[data-mode="page"],
+html[data-mode="page"] body{ height:100%; overflow:hidden; overscroll-behavior:none; }
+
+[data-mode="page"] .experience{
+  position:fixed; inset:0;
+  touch-action:pan-y;           /* vertical scrolling inside a card; horizontal swipes turn pages */
+}
+[data-mode="page"] .section{
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  padding:
+    calc(env(safe-area-inset-top) + 4.6rem)
+    var(--gutter)
+    calc(env(safe-area-inset-bottom) + 5.2rem);
+}
+.js[data-mode="page"] .section:not(.is-active){ visibility:hidden; }
+
+[data-mode="page"] .card{
+  display:flex; flex-direction:column;
+  max-height:100%;
+}
+[data-mode="page"] .card__body{
+  flex:1 1 auto;
+  min-height:0;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  scrollbar-width:none;
+}
+[data-mode="page"] .card__body::-webkit-scrollbar{ display:none; }
+
+/* page navigation: ‹  ◆ ◇ ◇ ◇  › */
+.page-nav{
+  position:fixed;
+  left:50%; bottom:max(14px, env(safe-area-inset-bottom));
+  z-index:40;
+  display:flex; align-items:center; gap:.4rem;
+  padding:4px;
+  border-radius:999px;
+  background:rgba(250,245,236,.9);
+  box-shadow:0 0 0 1px rgba(75,11,11,.15), 0 8px 20px rgba(60,10,8,.18);
+  transform:translateX(-50%);
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .6s var(--ease-soft), visibility .6s;
+}
+.is-opened .page-nav{ opacity:1; visibility:visible; }
+.page-nav__btn{
+  width:44px; height:44px;
+  display:grid; place-items:center;
+  border:0; border-radius:50%;
+  background:transparent;
+  color:var(--maroon);
+  cursor:pointer;
+}
+.page-nav__btn svg{ width:20px; height:20px; }
+.page-nav__btn:disabled{ opacity:.25; cursor:default; }
+.page-nav__dots{ display:flex; gap:2px; margin:0; padding:0; list-style:none; }
+.page-nav__dots button{
+  width:18px; height:44px;
+  display:grid; place-items:center;
+  padding:0; border:0; background:none;
+  cursor:pointer;
+}
+.page-nav__dots button::before{
+  content:"";
+  width:6px; height:6px;
+  border:1px solid var(--maroon);
+  transform:rotate(45deg);
+  transition:background-color .3s var(--ease-soft), transform .3s var(--ease-soft);
+}
+.page-nav__dots button[aria-current="step"]::before{ background:var(--maroon); transform:rotate(45deg) scale(1.3); }

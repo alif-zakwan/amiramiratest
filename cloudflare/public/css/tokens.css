@@ -1,0 +1,57 @@
+/* =====================================================================
+   ArifAmira — design tokens
+   Colours, type and spacing sampled from the printed card
+   (references/wedding_card_page1 + page2). Retheme from here.
+   ===================================================================== */
+
+/* Allura — supplied font file (assets/font), used for the names on the invitation card */
+@font-face{
+  font-family:'Allura';
+  src:url("../assets/font/Allura-Regular.ttf") format("truetype");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+
+:root{
+  /* -- palette ------------------------------------------------------- */
+  --maroon:        #620909;  /* the card's panel colour, sampled exactly */
+  --maroon-deep:   #470606;
+  --maroon-lift:   #7a1414;  /* soft highlight in the panel's centre */
+  --ivory:         #fffaf3;  /* card text: white with a hint of warmth */
+  --ivory-soft:    rgba(255,250,243,.82);
+  --blush:         #e8c6c2;  /* the pale pink of the card's corner curls */
+  --gold:          #c9a464;  /* gold-leaf accents */
+  --gold-soft:     rgba(201,164,100,.5);
+  --paper:         #e9e1d5;  /* embossed background paper */
+  --paper-card:    #faf5ec;  /* ivory insert cards */
+  --paper-edge:    #d9ccb9;
+  --ink:           #4b0b0b;  /* maroon "ink" on ivory cards */
+  --ink-soft:      #7d5a52;
+
+  /* -- type ------------------------------------------------------------ */
+  --font-script:  'Pinyon Script', 'Snell Roundhand', cursive;
+  --font-allura:  'Allura', 'Pinyon Script', cursive;
+  --font-caps:    'Cinzel', 'Trajan Pro', Georgia, serif;
+  --font-body:    'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --font-arabic:  'Amiri', 'Noto Naskh Arabic', serif;
+
+  --tracking-wide:  .18em;   /* spaced-out caps body text */
+  --tracking-caps:  .04em;
+
+  /* -- layout ---------------------------------------------------------- */
+  --card-max:     30rem;
+  --gutter:       clamp(1.1rem, 5vw, 1.75rem);
+  --card-pad-x:   clamp(1.3rem, 6.5vw, 2.6rem);
+  --card-pad-y:   clamp(2.8rem, 12vw, 3.6rem);
+  --scoop:        clamp(22px, 7vw, 34px);   /* radius of the scooped card corners */
+  --outline:      2px;                       /* white keyline around maroon cards */
+
+  /* -- motion ---------------------------------------------------------- */
+  --ease-out:     cubic-bezier(.22,.61,.36,1);
+  --ease-soft:    cubic-bezier(.4,0,.2,1);
+
+  /* -- textures (pre-rendered tiles, see assets/images) ---------------- */
+  --tex-paper:    url("../assets/images/paper-texture.webp");
+  --tex-grain:    url("../assets/images/grain-texture.webp");
+}

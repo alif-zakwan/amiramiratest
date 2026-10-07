@@ -1,0 +1,5 @@
+# Copy this file to .dev.vars (git-ignored) to run the Functions on your own computer
+# with `npm run dev`. On Cloudflare itself, set these two in the dashboard instead:
+# Workers & Pages -> your project -> Settings -> Variables and Secrets.
+RSVP_SHEET_URL=
+RSVP_SHEET_SECRET=
