@@ -1,0 +1,27 @@
+// Cloudflare Worker settings for the invitation (read by `wrangler deploy`).
+// The site (public/) is served as static assets; only the two .php addresses run code (worker.js).
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+
+  // Must match the name of your Worker in the Cloudflare dashboard (the first part of your
+  // ...workers.dev address), otherwise a second, separate Worker would be created.
+  "name": "amiramiratest",
+
+  "main": "worker.js",
+  "compatibility_date": "2025-01-01",
+
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    // Run the code for these two addresses first; everything else is served straight from public/
+    "run_worker_first": ["/rsvp.php", "/guestbook.php"]
+  },
+
+  // Keep the settings (RSVP_SHEET_URL / RSVP_SHEET_SECRET) that you typed in the dashboard
+  "keep_vars": true
+
+  // OPTIONAL safety net for when Google can't be reached: create a KV namespace in the
+  // dashboard (Storage & databases -> KV), copy its ID here and remove the // marks:
+  // ,"kv_namespaces": [{ "binding": "FALLBACK", "id": "PASTE-THE-KV-NAMESPACE-ID-HERE" }]
+}
