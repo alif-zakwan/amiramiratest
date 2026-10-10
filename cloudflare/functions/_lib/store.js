@@ -30,6 +30,14 @@ export function json(status, body) {
   });
 }
 
+let lastSheetError = '';
+
+/** Short, secret-free reason the last save failed (sent with the 500 answer to help setup). */
+export function whyFailed(env) {
+  if (!settings(env).useSheet) return 'RSVP_SHEET_URL is not set on this Worker (runtime variable missing)';
+  return lastSheetError || 'sheet not reached';
+}
+
 /**
  * Calls the Apps Script web app for one kind of entry ('rsvp' or 'ucapan').
  * Returns the list it answers with (newest first) or null on any failure.
@@ -55,11 +63,13 @@ export async function sheetCall(env, kind, payload) {
     const data = await response.json();
     if (!data || !data.ok || !Array.isArray(data.wishes) || (data.kind ?? 'rsvp') !== kind) {
       console.error(`Sheet call (${kind}) failed:`, JSON.stringify(data).slice(0, 200));
+      lastSheetError = `Google answered: ${JSON.stringify(data).slice(0, 120)}`;
       return null;
     }
     return data.wishes;
   } catch (error) {
     console.error(`Sheet call (${kind}) failed:`, String(error));
+    lastSheetError = `Could not read Google's answer: ${String(error).slice(0, 120)}`;
     return null;
   } finally {
     clearTimeout(timer);

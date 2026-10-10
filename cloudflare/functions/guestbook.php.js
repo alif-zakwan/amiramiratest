@@ -7,7 +7,7 @@
  *
  * Only name + message are ever sent to visitors.
  */
-import { settings, sheetCall, kvAppend, kvList, nowIso, json, readBody, cleanText, length } from './_lib/store.js';
+import { settings, sheetCall, kvAppend, kvList, nowIso, json, readBody, cleanText, length, whyFailed } from './_lib/store.js';
 
 const LIST_LIMIT = 50;           // newest wishes shown
 const CACHE_MS = 30_000;         // Google answers slowly, so the list is kept for 30 s
@@ -99,5 +99,5 @@ export async function onRequest({ request, env }) {
     remember();
     return json(200, { ok: true, wishes: publicWishes(await kvList(env, 'ucapan', LIST_LIMIT)) });
   }
-  return json(500, { ok: false, error: 'Tidak dapat menyimpan ucapan. Sila cuba lagi sebentar.' });
+  return json(500, { ok: false, error: 'Tidak dapat menyimpan ucapan. Sila cuba lagi sebentar.', why: whyFailed(env) });
 }

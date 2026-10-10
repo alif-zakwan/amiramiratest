@@ -6,7 +6,7 @@
  *
  * RSVPs are private: nothing lists them back (GET -> 405).
  */
-import { settings, sheetCall, kvAppend, nowIso, json, readBody, cut } from './_lib/store.js';
+import { settings, sheetCall, kvAppend, nowIso, json, readBody, cut, whyFailed } from './_lib/store.js';
 
 export async function onRequest({ request, env }) {
   if (request.method !== 'POST') {
@@ -49,5 +49,5 @@ export async function onRequest({ request, env }) {
   if (await kvAppend(env, 'rsvp', { ...entry, ip })) {
     return json(200, { ok: true });
   }
-  return json(500, { ok: false, error: 'Tidak dapat menyimpan RSVP. Sila cuba lagi sebentar.' });
+  return json(500, { ok: false, error: 'Tidak dapat menyimpan RSVP. Sila cuba lagi sebentar.', why: whyFailed(env) });
 }
